@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.asset.mapper.AssetBuildingMapper">
+
+    <resultMap type="AssetBuilding" id="AssetBuildingResult">
+        <result property="id"    column="id"    />
+        <result property="blockId"    column="block_id"    />
+        <result property="name"    column="name"    />
+        <result property="number"    column="number"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectAssetBuildingVo">
+        select id, block_id, name, number, create_time, create_by, update_time, update_by from asset_building
+    </sql>
+
+    <select id="selectAssetBuildingList" parameterType="AssetBuilding" resultMap="AssetBuildingResult">
+        <include refid="selectAssetBuildingVo"/>
+        <where>
+            <if test="blockId != null "> and block_id = #{blockId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="number != null  and number != ''"> and number like concat('%', #{number}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectAssetBuildingById" parameterType="Long" resultMap="AssetBuildingResult">
+        <include refid="selectAssetBuildingVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertAssetBuilding" parameterType="AssetBuilding" useGeneratedKeys="true" keyProperty="id">
+        insert into asset_building
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="blockId != null">block_id,</if>
+            <if test="name != null">name,</if>
+            <if test="number != null">number,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="blockId != null">#{blockId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="number != null">#{number},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updateAssetBuilding" parameterType="AssetBuilding">
+        update asset_building
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="blockId != null">block_id = #{blockId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAssetBuildingById" parameterType="Long">
+        delete from asset_building where id = #{id}
+    </delete>
+
+    <delete id="deleteAssetBuildingByIds" parameterType="String">
+        delete from asset_building where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
