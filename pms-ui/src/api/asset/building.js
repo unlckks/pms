@@ -42,3 +42,11 @@ export function delBuilding(id) {
     method: 'delete'
   })
 }
+  //查询楼栋不分页
+  export function getAllBuilding() {
+    return request({
+      url: '/asset/building/getAllBuilding',
+      method: 'get'
+    })
+  }
+

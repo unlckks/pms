@@ -103,4 +103,14 @@ public class AssetBuildingController extends BaseController
     {
         return toAjax(assetBuildingService.deleteAssetBuildingByIds(ids));
     }
+
+    /**
+     * 查询不分页
+     * @return
+     */
+    @GetMapping("/getAllBuilding")
+    public  AjaxResult getAllBuilding(){
+        List<AssetBuilding> assetBuildings =this.assetBuildingService.getAllBuilding();
+     return  AjaxResult.success(assetBuildings);
+    }
 }

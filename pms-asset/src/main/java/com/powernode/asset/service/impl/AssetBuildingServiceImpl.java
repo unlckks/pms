@@ -8,6 +8,8 @@ import com.powernode.asset.mapper.AssetBuildingMapper;
 import com.powernode.asset.domain.AssetBuilding;
 import com.powernode.asset.service.IAssetBuildingService;
 
+import javax.annotation.Resource;
+
 /**
  * 楼栋管理Service业务层处理
  * 
@@ -17,7 +19,7 @@ import com.powernode.asset.service.IAssetBuildingService;
 @Service
 public class AssetBuildingServiceImpl implements IAssetBuildingService 
 {
-    @Autowired
+    @Resource
     private AssetBuildingMapper assetBuildingMapper;
 
     /**
@@ -92,5 +94,14 @@ public class AssetBuildingServiceImpl implements IAssetBuildingService
     public int deleteAssetBuildingById(Long id)
     {
         return assetBuildingMapper.deleteAssetBuildingById(id);
+    }
+
+    /**
+     * 查询不分页
+     * @return
+     */
+    @Override
+    public List<AssetBuilding> getAllBuilding() {
+        return   this.assetBuildingMapper.selectAssetBuildingList(new AssetBuilding());
     }
 }

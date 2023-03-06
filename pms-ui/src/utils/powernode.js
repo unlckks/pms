@@ -1,5 +1,3 @@
-
-
 /**
  * 通用js方法封装处理
  * Copyright (c) 2019 powernode
@@ -37,7 +35,9 @@ export function parseTime(time, pattern) {
   const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value]
+    }
     if (result.length > 0 && value < 10) {
       value = '0' + value
     }
@@ -88,7 +88,7 @@ export function selectDictLabel(datas, value) {
 
 // 回显数据字典（字符串、数组）
 export function selectDictLabels(datas, value, separator) {
-  if (value === undefined || value.length ===0) {
+  if (value === undefined || value.length === 0) {
     return "";
   }
   if (Array.isArray(value)) {
@@ -198,13 +198,14 @@ export function handleTree(data, id, parentId, children) {
       }
     }
   }
+
   return tree;
 }
 
 /**
-* 参数处理
-* @param {*} params  参数
-*/
+ * 参数处理
+ * @param {*} params  参数
+ */
 export function tansParams(params) {
   let result = ''
   for (const propName of Object.keys(params)) {
@@ -230,4 +231,21 @@ export function tansParams(params) {
 // 验证是否为blob格式
 export function blobValidate(data) {
   return data.type !== 'application/json'
+}
+
+//进行处理商圈和楼栋数据.转成级联选择器选择需要的数据
+export function handleBlockAndBuildingData(blockList,buildingList){
+  let arr=new Array();
+  blockList.filter(block=>{
+    let obj={label:block.name,value:block.id};
+    let children=new  Array();
+    buildingList.filter(building=>{
+      if(block.id==building.blockId){
+        children.push({value:building.id,label:building.name})
+      }
+    })
+    obj.children=children;
+    arr.push(obj);
+  })
+  return arr;
 }

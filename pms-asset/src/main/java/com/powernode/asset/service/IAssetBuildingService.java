@@ -58,4 +58,10 @@ public interface IAssetBuildingService
      * @return 结果
      */
     public int deleteAssetBuildingById(Long id);
+
+    /**
+     * 查询不分页
+     * @return
+     */
+    List<AssetBuilding> getAllBuilding();
 }
