@@ -67,6 +67,18 @@
             <artifactId>pms-asset</artifactId>
         </dependency>
 
+        <!--业主管理模块-->
+        <dependency>
+            <groupId>com.powernode</groupId>
+            <artifactId>pms-owner</artifactId>
+        </dependency>
+
+        <!--收费管理模块-->
+        <dependency>
+            <groupId>com.powernode</groupId>
+            <artifactId>pms-pay</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

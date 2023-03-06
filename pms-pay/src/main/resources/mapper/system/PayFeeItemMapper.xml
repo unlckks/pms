@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayFeeItemMapper">
+    
+    <resultMap type="PayFeeItem" id="PayFeeItemResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="name"    column="name"    />
+        <result property="price"    column="price"    />
+        <result property="numType"    column="num_type"    />
+        <result property="period"    column="period"    />
+        <result property="formula"    column="formula"    />
+        <result property="formulaExpression"    column="formula_expression"    />
+        <result property="lateFeeEnable"    column="late_fee_enable"    />
+        <result property="lateFeeDays"    column="late_fee_days"    />
+        <result property="lateFeeRate"    column="late_fee_rate"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectPayFeeItemVo">
+        select id, type, name, price, num_type, period, formula, formula_expression, late_fee_enable, late_fee_days, late_fee_rate, create_time, create_by, update_time, update_by from pay_fee_item
+    </sql>
+
+    <select id="selectPayFeeItemList" parameterType="PayFeeItem" resultMap="PayFeeItemResult">
+        <include refid="selectPayFeeItemVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="numType != null  and numType != ''"> and num_type = #{numType}</if>
+            <if test="period != null "> and period = #{period}</if>
+            <if test="formula != null  and formula != ''"> and formula = #{formula}</if>
+            <if test="formulaExpression != null  and formulaExpression != ''"> and formula_expression = #{formulaExpression}</if>
+            <if test="lateFeeEnable != null  and lateFeeEnable != ''"> and late_fee_enable = #{lateFeeEnable}</if>
+            <if test="lateFeeDays != null "> and late_fee_days = #{lateFeeDays}</if>
+            <if test="lateFeeRate != null  and lateFeeRate != ''"> and late_fee_rate = #{lateFeeRate}</if>
+        </where>
+    </select>
+    
+    <select id="selectPayFeeItemById" parameterType="Long" resultMap="PayFeeItemResult">
+        <include refid="selectPayFeeItemVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPayFeeItem" parameterType="PayFeeItem" useGeneratedKeys="true" keyProperty="id">
+        insert into pay_fee_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">type,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="price != null">price,</if>
+            <if test="numType != null and numType != ''">num_type,</if>
+            <if test="period != null">period,</if>
+            <if test="formula != null and formula != ''">formula,</if>
+            <if test="formulaExpression != null">formula_expression,</if>
+            <if test="lateFeeEnable != null and lateFeeEnable != ''">late_fee_enable,</if>
+            <if test="lateFeeDays != null">late_fee_days,</if>
+            <if test="lateFeeRate != null">late_fee_rate,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="price != null">#{price},</if>
+            <if test="numType != null and numType != ''">#{numType},</if>
+            <if test="period != null">#{period},</if>
+            <if test="formula != null and formula != ''">#{formula},</if>
+            <if test="formulaExpression != null">#{formulaExpression},</if>
+            <if test="lateFeeEnable != null and lateFeeEnable != ''">#{lateFeeEnable},</if>
+            <if test="lateFeeDays != null">#{lateFeeDays},</if>
+            <if test="lateFeeRate != null">#{lateFeeRate},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePayFeeItem" parameterType="PayFeeItem">
+        update pay_fee_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="numType != null and numType != ''">num_type = #{numType},</if>
+            <if test="period != null">period = #{period},</if>
+            <if test="formula != null and formula != ''">formula = #{formula},</if>
+            <if test="formulaExpression != null">formula_expression = #{formulaExpression},</if>
+            <if test="lateFeeEnable != null and lateFeeEnable != ''">late_fee_enable = #{lateFeeEnable},</if>
+            <if test="lateFeeDays != null">late_fee_days = #{lateFeeDays},</if>
+            <if test="lateFeeRate != null">late_fee_rate = #{lateFeeRate},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayFeeItemById" parameterType="Long">
+        delete from pay_fee_item where id = #{id}
+    </delete>
+
+    <delete id="deletePayFeeItemByIds" parameterType="String">
+        delete from pay_fee_item where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

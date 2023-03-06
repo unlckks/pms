@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.owner.mapper.OwnerUserMapper">
+    
+    <resultMap type="OwnerUser" id="OwnerUserResult">
+        <result property="id"    column="id"    />
+        <result property="unionId"    column="union_id"    />
+        <result property="openId"    column="open_id"    />
+        <result property="token"    column="token"    />
+        <result property="company"    column="company"    />
+        <result property="username"    column="username"    />
+        <result property="identity"    column="identity"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="userType"    column="user_type"    />
+        <result property="email"    column="email"    />
+        <result property="phone"    column="phone"    />
+        <result property="sex"    column="sex"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="status"    column="status"    />
+        <result property="rentedCount"    column="rented_count"    />
+        <result property="ownCount"    column="own_count"    />
+        <result property="isBind"    column="is_bind"    />
+        <result property="remark"    column="remark"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectOwnerUserVo">
+        select id, union_id, open_id, token, company, username, identity, nick_name, user_type, email, phone, sex, avatar, status, rented_count, own_count, is_bind, remark, create_by, create_time, update_by, update_time from owner_user
+    </sql>
+
+    <select id="selectOwnerUserList" parameterType="OwnerUser" resultMap="OwnerUserResult">
+        <include refid="selectOwnerUserVo"/>
+        <where>  
+            <if test="company != null  and company != ''"> and company like concat('%', #{company}, '%')</if>
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
+            <if test="identity != null  and identity != ''"> and identity like concat('%', #{identity}, '%')</if>
+            <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="email != null  and email != ''"> and email like concat('%', #{email}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone like concat('%', #{phone}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectOwnerUserById" parameterType="Long" resultMap="OwnerUserResult">
+        <include refid="selectOwnerUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOwnerUser" parameterType="OwnerUser" useGeneratedKeys="true" keyProperty="id">
+        insert into owner_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="unionId != null">union_id,</if>
+            <if test="openId != null">open_id,</if>
+            <if test="token != null">token,</if>
+            <if test="company != null and company != ''">company,</if>
+            <if test="username != null and username != ''">username,</if>
+            <if test="identity != null and identity != ''">identity,</if>
+            <if test="nickName != null and nickName != ''">nick_name,</if>
+            <if test="userType != null">user_type,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="status != null">status,</if>
+            <if test="rentedCount != null">rented_count,</if>
+            <if test="ownCount != null">own_count,</if>
+            <if test="isBind != null">is_bind,</if>
+            <if test="remark != null">remark,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="unionId != null">#{unionId},</if>
+            <if test="openId != null">#{openId},</if>
+            <if test="token != null">#{token},</if>
+            <if test="company != null and company != ''">#{company},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="identity != null and identity != ''">#{identity},</if>
+            <if test="nickName != null and nickName != ''">#{nickName},</if>
+            <if test="userType != null">#{userType},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="status != null">#{status},</if>
+            <if test="rentedCount != null">#{rentedCount},</if>
+            <if test="ownCount != null">#{ownCount},</if>
+            <if test="isBind != null">#{isBind},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOwnerUser" parameterType="OwnerUser">
+        update owner_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="unionId != null">union_id = #{unionId},</if>
+            <if test="openId != null">open_id = #{openId},</if>
+            <if test="token != null">token = #{token},</if>
+            <if test="company != null and company != ''">company = #{company},</if>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="identity != null and identity != ''">identity = #{identity},</if>
+            <if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
+            <if test="userType != null">user_type = #{userType},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="rentedCount != null">rented_count = #{rentedCount},</if>
+            <if test="ownCount != null">own_count = #{ownCount},</if>
+            <if test="isBind != null">is_bind = #{isBind},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOwnerUserById" parameterType="Long">
+        delete from owner_user where id = #{id}
+    </delete>
+
+    <delete id="deleteOwnerUserByIds" parameterType="String">
+        delete from owner_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
