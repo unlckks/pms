@@ -1,5 +1,7 @@
 <template>
-  <div class="app-container">
+  <el-dialog
+    center
+    :title="title" :visible.sync="open" width="80%" append-to-body>
     <el-row :gutter="20">
       <el-col :span="6" :xs="24">
         <el-card class="box-card">
@@ -124,16 +126,21 @@
         </el-card>
       </el-col>
     </el-row>
-  </div>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="open=false">关 闭</el-button>
+    </div>
+  </el-dialog>
 </template>
 
 <script>
-// import { getOwnerUserDetail } from '@/api/owner/ownerUser';
+import {getUser} from '@/api/owner/user';
 
 export default {
   name: 'Profile',
   data() {
     return {
+      open:false,
+      title:"",
       user: {},
       activeTab: 'houseInfo',
       loading: false,
@@ -147,9 +154,12 @@ export default {
   created() {
   },
   methods: {
-    init(ownerUser) {
-      console.log(ownerUser)
-      this.user = ownerUser;
+    init(id) {
+      this.open=true;
+      getUser(id).then(res => {
+        this.user = res.data;
+        this.title=`【${this.user.username}】的详情`
+      })
       /** 查询业主信息列表 */
       // this.loading = true;
       // getOwnerUserDetail(this.user.id).then(response => {

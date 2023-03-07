@@ -76,4 +76,11 @@ public interface PayPrestoreAccountMapper {
      * @return
      */
     PayPrestoreAccount selectNoUseFeeItemAccount(@Param("feeUserId") Long feeUserId);
+
+    /**
+     * 根据id查询业主存款信息
+     * @param ownerId
+     * @return
+     */
+    List<PayPrestoreAccount> queryPayPrestoreAccountByUserOwnerId(@Param("ownerId") Long ownerId);
 }

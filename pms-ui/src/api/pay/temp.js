@@ -35,10 +35,3 @@ export function updateTemp(data) {
   })
 }
 
-// 删除临时收费
-export function delTemp(id) {
-  return request({
-    url: '/pay/temp/' + id,
-    method: 'delete'
-  })
-}

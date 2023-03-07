@@ -10,8 +10,19 @@ public interface PayConstants {
     //已退费
     String PAY_STATE_REFUND="refunded";
 
+    //已预存
+    String PAY_STORE_STATE_PAY="pay";
+
+    //已退还
+    String PAY_STORE_STATE_REFUND="refund";
+
     //前缀-付款流水号
     String PAY_PREFIX_PAY="pay.prefix.pay";
+
+    //账户没金额
     String N = "N";
+
+    //账户有金额
     String Y="Y";
+
 }

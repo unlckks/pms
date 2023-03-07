@@ -2,11 +2,11 @@
   <div>
     <el-dialog center :title="title" v-if="open" :visible.sync="open" width="800px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-form-item label="客户ID" prop="feeUserId">
+        <el-form-item label="业主ID" prop="feeUserId">
           <el-input v-model="form.feeUserId" style="width: 80%" disabled placeholder="请输入客户ID"/>
           <el-button type="primary" style="margin-left: 10px" @click="selectOwner">选 择</el-button>
         </el-form-item>
-        <el-form-item label="客户姓名" prop="feeUserName">
+        <el-form-item label="业主姓名" prop="feeUserName">
           <el-input v-model="form.feeUserName" disabled placeholder="请输入客户姓名"/>
         </el-form-item>
         <el-form-item label="是否指定收费项" prop="useFeeItem">
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import {addPrestore, updatePrestore} from "@/api/pay/prestore";
+import {addPrestore} from "@/api/pay/prestore";
 import {getPayFeeItemByType} from "@/api/pay/payItemConfig";
 import SelectBox from "@/views/owner/user/selectBox";
 
@@ -103,7 +103,7 @@ export default {
   methods: {
     init() {
       this.open = true
-      this.title = "业务费用预存"
+      this.title = "业主费用预存"
       this.form={
         useFeeItem: "N",
         feeUserId: undefined,

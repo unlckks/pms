@@ -2,6 +2,7 @@ package com.powernode.pay.service;
 
 import java.util.List;
 import com.powernode.pay.domain.PayPrestore;
+import com.powernode.pay.domain.PayPrestoreAccount;
 
 /**
  * 费用预存Service接口
@@ -58,4 +59,18 @@ public interface IPayPrestoreService
      * @return 结果
      */
     public int deletePayPrestoreById(Long id);
+
+    /**
+     * 根据业主ID查询业主的所有账户的信息
+     * @return
+     */
+    List<PayPrestoreAccount> queryPayPrestoreAccountByUserOwnerId(Long ownerId);
+
+    /**
+     * 退存款
+     * @param type
+     * @param accounts
+     * @param username
+     */
+    void refundPrestoreAccount(String type, PayPrestoreAccount[] accounts, String username);
 }

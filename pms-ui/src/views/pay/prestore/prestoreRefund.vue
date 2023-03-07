@@ -25,7 +25,7 @@
         <el-tabs v-model="activeName">
           <el-tab-pane label="剩余预存款" name="account">
             <el-table border :data="accountList" size="mini">
-              <el-table-column type="id" width="50" label="ID" align="center" />
+              <el-table-column prop="id" width="50" label="ID" align="center" />
               <el-table-column prop="feeItemName" label="收费项" />
               <el-table-column prop="amt" label="账户金额" />
               <el-table-column prop="changeMoney" label="退还金额">
@@ -106,6 +106,7 @@ export default {
     },
     //选择之后的回调
     select(data) {
+      this.accountList=[]
       this.form.feeUserId = data.id;
       this.form.feeUserName = data.username;
       getPayPrestoreAccountByUserOwnerId(data.id).then(res=>{
@@ -141,11 +142,11 @@ export default {
             this.$modal.msgError("退费金额不能大于预存金额");
             return;
           }
-          // refundPrestoreAccount(arr,this.form.payType).then(response => {
-          //   this.$modal.msgSuccess("退费成功");
-          //   this.open = false;
-          //   this.$emit("after");
-          // });
+          refundPrestoreAccount(arr,this.form.payType).then(response => {
+            this.$modal.msgSuccess("退费成功");
+            this.open = false;
+            this.$emit("after");
+          });
         }
       });
     },

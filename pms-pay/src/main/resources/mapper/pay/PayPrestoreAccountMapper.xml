@@ -196,4 +196,10 @@
         where fee_user_id = #{feeUserId}
           and use_fee_item = 'N'
     </select>
+
+    <!--根据业主ID查询业主的所有账户的信息-->
+    <select id="queryPayPrestoreAccountByUserOwnerId" resultMap="PayPrestoreAccountResult">
+    <include refid="selectPayPrestoreAccountVo">
+    </include> where  fee_user_id=#{ownerId}
+    </select>
 </mapper>

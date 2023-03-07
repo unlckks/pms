@@ -5,13 +5,16 @@ import java.util.Date;
 import java.util.List;
 
 import com.powernode.common.utils.DateUtils;
+import com.powernode.common.utils.uuid.IdUtils;
 import com.powernode.pay.constants.PayConstants;
 import com.powernode.pay.domain.PayPrestoreAccount;
 import com.powernode.pay.mapper.PayPrestoreAccountMapper;
+import com.powernode.system.service.ISysConfigService;
 import org.springframework.stereotype.Service;
 import com.powernode.pay.mapper.PayPrestoreMapper;
 import com.powernode.pay.domain.PayPrestore;
 import com.powernode.pay.service.IPayPrestoreService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -28,6 +31,9 @@ public class PayPrestoreServiceImpl implements IPayPrestoreService {
 
     @Resource
     private PayPrestoreAccountMapper payPrestoreAccountMapper;
+
+    @Resource
+    private ISysConfigService configService;
 
     /**
      * 查询费用预存
@@ -89,6 +95,7 @@ public class PayPrestoreServiceImpl implements IPayPrestoreService {
             account.setFeeItemName(feeItemName);
             account.setFeeUserId(feeUserId);
             account.setFeeUserName(feeUserName);
+            account.setUseFeeItem(useFeeItem);
             account.setAmt(payPrestore.getAmt());
             account.setCreateTime(new Date());
             account.setCreateBy(payPrestore.getCreateBy());
@@ -136,5 +143,60 @@ public class PayPrestoreServiceImpl implements IPayPrestoreService {
     @Override
     public int deletePayPrestoreById(Long id) {
         return payPrestoreMapper.deletePayPrestoreById(id);
+    }
+
+    /**
+     * 根据业主ID查询业主的所有账户的信息
+     *
+     * @return
+     */
+    @Override
+    public List<PayPrestoreAccount> queryPayPrestoreAccountByUserOwnerId(Long ownerId) {
+
+        return this.payPrestoreAccountMapper.queryPayPrestoreAccountByUserOwnerId(ownerId);
+    }
+
+    /**
+     * 退存款
+     *
+     * @param type
+     * @param accounts
+     * @param username
+     */
+    @Override
+    @Transactional
+    public void refundPrestoreAccount(String type, PayPrestoreAccount[] accounts, String username) {
+        //进行遍历
+        for (PayPrestoreAccount account : accounts) {
+            PayPrestoreAccount acc = this.payPrestoreAccountMapper.selectPayPrestoreAccountById(account.getId());
+            //如果退费的金额大于账户里的金额
+            if (acc.getAmt().doubleValue() < account.getAmt().doubleValue()) {
+                throw new RuntimeException("退费的金额大于账户里的金额");
+            }
+            if(account.getAmt().doubleValue() == 0){
+                continue;
+            }
+            acc.setAmt(acc.getAmt().subtract(account.getAmt()));
+            //进行更新方法
+            this.payPrestoreAccountMapper.updatePayPrestoreAccount(acc);
+            //创建一个退费记录
+            PayPrestore payPrestore = new PayPrestore();
+            //创建退费单号
+            payPrestore.setPayNo(IdUtils.createNoWithPrefix(configService.selectConfigByKey(PayConstants.PAY_PREFIX_PAY)));
+            //退费金额
+            payPrestore.setAmt(account.getAmt());
+            payPrestore.setOperateTime(new Date());
+            payPrestore.setFeeItemId(acc.getFeeItemId() == null ? null : acc.getFeeItemId().toString());
+            payPrestore.setFeeItemName(acc.getFeeItemName());
+            payPrestore.setOperateUser(username);
+            payPrestore.setType(PayConstants.PAY_STORE_STATE_REFUND);
+            payPrestore.setPayType(type);
+            payPrestore.setOperateTime(new Date());
+            payPrestore.setFeeUserId(acc.getFeeUserId());
+            payPrestore.setFeeUserName(acc.getFeeUserName());
+            payPrestore.setUseFeeItem(acc.getUseFeeItem());
+            payPrestore.setCreateTime(new Date());
+            this.payPrestoreMapper.insertPayPrestore(payPrestore);
+        }
     }
 }
