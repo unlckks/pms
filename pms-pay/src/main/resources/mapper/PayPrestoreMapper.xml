@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayPrestoreMapper">
+
+    <resultMap type="PayPrestore" id="PayPrestoreResult">
+        <result property="id"    column="id"    />
+        <result property="feeItemId"    column="fee_item_id"    />
+        <result property="feeItemName"    column="fee_item_name"    />
+        <result property="feeUserId"    column="fee_user_id"    />
+        <result property="feeUserName"    column="fee_user_name"    />
+        <result property="amt"    column="amt"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="type"    column="type"    />
+        <result property="useFeeItem"    column="use_fee_item"    />
+        <result property="operateUser"    column="operate_user"    />
+        <result property="operateTime"    column="operate_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="payNo"    column="pay_no"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectPayPrestoreVo">
+        select id, fee_item_id, fee_item_name, fee_user_id, fee_user_name, amt, pay_type, type, use_fee_item, operate_user, operate_time, remark, pay_no, create_time, create_by, update_time, update_by from pay_prestore
+    </sql>
+
+    <select id="selectPayPrestoreList" parameterType="PayPrestore" resultMap="PayPrestoreResult">
+        <include refid="selectPayPrestoreVo"/>
+        <where>
+            <if test="feeItemId != null  and feeItemId != ''"> and fee_item_id = #{feeItemId}</if>
+            <if test="feeItemName != null  and feeItemName != ''"> and fee_item_name like concat('%', #{feeItemName}, '%')</if>
+            <if test="feeUserId != null "> and fee_user_id = #{feeUserId}</if>
+            <if test="feeUserName != null  and feeUserName != ''"> and fee_user_name like concat('%', #{feeUserName}, '%')</if>
+            <if test="amt != null "> and amt = #{amt}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="useFeeItem != null  and useFeeItem != ''"> and use_fee_item = #{useFeeItem}</if>
+            <if test="operateUser != null  and operateUser != ''"> and operate_user = #{operateUser}</if>
+            <if test="operateTime != null "> and operate_time = #{operateTime}</if>
+            <if test="payNo != null  and payNo != ''"> and pay_no = #{payNo}</if>
+        </where>
+    </select>
+
+    <select id="selectPayPrestoreById" parameterType="Long" resultMap="PayPrestoreResult">
+        <include refid="selectPayPrestoreVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPayPrestore" parameterType="PayPrestore" useGeneratedKeys="true" keyProperty="id">
+        insert into pay_prestore
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feeItemId != null">fee_item_id,</if>
+            <if test="feeItemName != null">fee_item_name,</if>
+            <if test="feeUserId != null">fee_user_id,</if>
+            <if test="feeUserName != null">fee_user_name,</if>
+            <if test="amt != null">amt,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="type != null">type,</if>
+            <if test="useFeeItem != null">use_fee_item,</if>
+            <if test="operateUser != null">operate_user,</if>
+            <if test="operateTime != null">operate_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="payNo != null">pay_no,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feeItemId != null">#{feeItemId},</if>
+            <if test="feeItemName != null">#{feeItemName},</if>
+            <if test="feeUserId != null">#{feeUserId},</if>
+            <if test="feeUserName != null">#{feeUserName},</if>
+            <if test="amt != null">#{amt},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="type != null">#{type},</if>
+            <if test="useFeeItem != null">#{useFeeItem},</if>
+            <if test="operateUser != null">#{operateUser},</if>
+            <if test="operateTime != null">#{operateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="payNo != null">#{payNo},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePayPrestore" parameterType="PayPrestore">
+        update pay_prestore
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="feeItemId != null">fee_item_id = #{feeItemId},</if>
+            <if test="feeItemName != null">fee_item_name = #{feeItemName},</if>
+            <if test="feeUserId != null">fee_user_id = #{feeUserId},</if>
+            <if test="feeUserName != null">fee_user_name = #{feeUserName},</if>
+            <if test="amt != null">amt = #{amt},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="useFeeItem != null">use_fee_item = #{useFeeItem},</if>
+            <if test="operateUser != null">operate_user = #{operateUser},</if>
+            <if test="operateTime != null">operate_time = #{operateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="payNo != null">pay_no = #{payNo},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayPrestoreById" parameterType="Long">
+        delete from pay_prestore where id = #{id}
+    </delete>
+
+    <delete id="deletePayPrestoreByIds" parameterType="String">
+        delete from pay_prestore where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

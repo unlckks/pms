@@ -61,5 +61,10 @@ public interface IAssetHouseService
      */
     public int deleteAssetHouseById(Long id);
 
+    /**
+     * 查询所有资源不分页
+     * @return
+     */
+    List<AssetHouse> queryAllHouses();
 
 }

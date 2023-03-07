@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayPrestoreAccountMapper">
+    <resultMap type="PayPrestoreAccount" id="PayPrestoreAccountResult">
+        <result property="id" column="id"/>
+        <result property="feeUserId" column="fee_user_id"/>
+        <result property="feeUserName" column="fee_user_name"/>
+        <result property="useFeeItem" column="use_fee_item"/>
+        <result property="feeItemName" column="fee_item_name"/>
+        <result property="feeItemId" column="fee_item_id"/>
+        <result property="amt" column="amt"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <sql id="selectPayPrestoreAccountVo">
+        select id,
+               fee_user_id,
+               fee_user_name,
+               use_fee_item,
+               fee_item_name,
+               fee_item_id,
+               amt,
+               create_time,
+               create_by,
+               update_time,
+               update_by
+        from pay_prestore_account
+    </sql>
+
+    <select id="selectPayPrestoreAccountList" parameterType="PayPrestoreAccount" resultMap="PayPrestoreAccountResult">
+        <include refid="selectPayPrestoreAccountVo"/>
+        <where>
+            <if test="feeUserId != null">
+                and fee_user_id = #{feeUserId}
+            </if>
+            <if test="feeUserName != null  and feeUserName != ''">
+                and fee_user_name like concat('%', #{feeUserName}, '%')
+            </if>
+            <if test="useFeeItem != null  and useFeeItem != ''">
+                and use_fee_item = #{useFeeItem}
+            </if>
+            <if test="feeItemName != null  and feeItemName != ''">
+                and fee_item_name like concat('%', #{feeItemName}, '%')
+            </if>
+            <if test="feeItemId != null">
+                and fee_item_id = #{feeItemId}
+            </if>
+            <if test="amt != null">
+                and amt = #{amt}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPayPrestoreAccountById" parameterType="Long" resultMap="PayPrestoreAccountResult">
+        <include refid="selectPayPrestoreAccountVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPayPrestoreAccount" parameterType="PayPrestoreAccount" useGeneratedKeys="true" keyProperty="id">
+        insert into pay_prestore_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feeUserId != null">
+                fee_user_id,
+            </if>
+            <if test="feeUserName != null">
+                fee_user_name,
+            </if>
+            <if test="useFeeItem != null">
+                use_fee_item,
+            </if>
+            <if test="feeItemName != null">
+                fee_item_name,
+            </if>
+            <if test="feeItemId != null">
+                fee_item_id,
+            </if>
+            <if test="amt != null">
+                amt,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feeUserId != null">
+                #{feeUserId},
+            </if>
+            <if test="feeUserName != null">
+                #{feeUserName},
+            </if>
+            <if test="useFeeItem != null">
+                #{useFeeItem},
+            </if>
+            <if test="feeItemName != null">
+                #{feeItemName},
+            </if>
+            <if test="feeItemId != null">
+                #{feeItemId},
+            </if>
+            <if test="amt != null">
+                #{amt},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updatePayPrestoreAccount" parameterType="PayPrestoreAccount">
+        update pay_prestore_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="feeUserId != null">
+                fee_user_id = #{feeUserId},
+            </if>
+            <if test="feeUserName != null">
+                fee_user_name = #{feeUserName},
+            </if>
+            <if test="useFeeItem != null">
+                use_fee_item = #{useFeeItem},
+            </if>
+            <if test="feeItemName != null">
+                fee_item_name = #{feeItemName},
+            </if>
+            <if test="feeItemId != null">
+                fee_item_id = #{feeItemId},
+            </if>
+            <if test="amt != null">
+                amt = #{amt},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayPrestoreAccountById" parameterType="Long">
+        delete
+        from pay_prestore_account
+        where id = #{id}
+    </delete>
+
+    <delete id="deletePayPrestoreAccountByIds" parameterType="String">
+        delete
+        from pay_prestore_account where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--根据业主ID和收费项目ID查询账户-->
+    <select id="selectUseFeeItemAccount" resultMap="PayPrestoreAccountResult">
+        <include refid="selectPayPrestoreAccountVo">
+        </include>
+        where fee_user_id = #{feeUserId}
+          and fee_item_id = #{feeItemId}
+          and use_fee_item = 'Y'
+    </select>
+
+    <!--根据业主ID查询账户-->
+    <select id="selectNoUseFeeItemAccount" resultMap="PayPrestoreAccountResult">
+        <include refid="selectPayPrestoreAccountVo">
+        </include>
+        where fee_user_id = #{feeUserId}
+          and use_fee_item = 'N'
+    </select>
+</mapper>

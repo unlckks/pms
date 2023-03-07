@@ -110,4 +110,13 @@ public class AssetHouseController extends BaseController
         return toAjax(assetHouseService.deleteAssetHouseByIds(ids));
     }
 
+
+    /**
+     * 查询所有资源不分页
+     */
+    @GetMapping("getAllHouses")
+    public AjaxResult getAllHouses(){
+        List<AssetHouse> assetHouses=this.assetHouseService.queryAllHouses();
+        return  AjaxResult.success(assetHouses);
+    }
 }

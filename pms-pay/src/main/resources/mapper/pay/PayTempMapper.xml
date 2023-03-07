@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayTempMapper">
+
+    <resultMap type="PayTemp" id="PayTempResult">
+        <result property="id"    column="id"    />
+        <result property="resourceName"    column="resource_name"    />
+        <result property="resourceId"    column="resource_id"    />
+        <result property="block"    column="block"    />
+        <result property="feeItemId"    column="fee_item_id"    />
+        <result property="feeItemName"    column="fee_item_name"    />
+        <result property="feeUser"    column="fee_user"    />
+        <result property="amt"    column="amt"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="refundType"    column="refund_type"    />
+        <result property="operateUser"    column="operate_user"    />
+        <result property="operateTime"    column="operate_time"    />
+        <result property="refundUser"    column="refund_user"    />
+        <result property="refundTime"    column="refund_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="payNo"    column="pay_no"    />
+        <result property="refundNo"    column="refund_no"    />
+        <result property="state"    column="state"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectPayTempVo">
+        select id, resource_name, resource_id, block, fee_item_id, fee_item_name, fee_user, amt, pay_type, refund_type, operate_user, operate_time, refund_user, refund_time, remark, pay_no, refund_no, state, create_time, create_by, update_time, update_by from pay_temp
+    </sql>
+
+    <select id="selectPayTempList" parameterType="PayTemp" resultMap="PayTempResult">
+        <include refid="selectPayTempVo"/>
+        <where>
+            <if test="resourceName != null  and resourceName != ''"> and resource_name like concat('%', #{resourceName}, '%')</if>
+            <if test="resourceId != null "> and resource_id = #{resourceId}</if>
+            <if test="block != null "> and block = #{block}</if>
+            <if test="feeItemId != null "> and fee_item_id = #{feeItemId}</if>
+            <if test="feeItemName != null  and feeItemName != ''"> and fee_item_name like concat('%', #{feeItemName}, '%')</if>
+            <if test="feeUser != null  and feeUser != ''"> and fee_user = #{feeUser}</if>
+            <if test="amt != null "> and amt = #{amt}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="refundType != null  and refundType != ''"> and refund_type = #{refundType}</if>
+            <if test="operateUser != null  and operateUser != ''"> and operate_user = #{operateUser}</if>
+            <if test="operateTime != null "> and operate_time = #{operateTime}</if>
+            <if test="refundUser != null  and refundUser != ''"> and refund_user = #{refundUser}</if>
+            <if test="refundTime != null "> and refund_time = #{refundTime}</if>
+            <if test="payNo != null  and payNo != ''"> and pay_no = #{payNo}</if>
+            <if test="refundNo != null  and refundNo != ''"> and refund_no = #{refundNo}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+        </where>
+    </select>
+
+    <select id="selectPayTempById" parameterType="Long" resultMap="PayTempResult">
+        <include refid="selectPayTempVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPayTemp" parameterType="PayTemp" useGeneratedKeys="true" keyProperty="id">
+        insert into pay_temp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="resourceName != null">resource_name,</if>
+            <if test="resourceId != null">resource_id,</if>
+            <if test="block != null">block,</if>
+            <if test="feeItemId != null">fee_item_id,</if>
+            <if test="feeItemName != null and feeItemName != ''">fee_item_name,</if>
+            <if test="feeUser != null">fee_user,</if>
+            <if test="amt != null">amt,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="refundType != null">refund_type,</if>
+            <if test="operateUser != null">operate_user,</if>
+            <if test="operateTime != null">operate_time,</if>
+            <if test="refundUser != null">refund_user,</if>
+            <if test="refundTime != null">refund_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="payNo != null">pay_no,</if>
+            <if test="refundNo != null">refund_no,</if>
+            <if test="state != null">state,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="resourceName != null">#{resourceName},</if>
+            <if test="resourceId != null">#{resourceId},</if>
+            <if test="block != null">#{block},</if>
+            <if test="feeItemId != null">#{feeItemId},</if>
+            <if test="feeItemName != null and feeItemName != ''">#{feeItemName},</if>
+            <if test="feeUser != null">#{feeUser},</if>
+            <if test="amt != null">#{amt},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="refundType != null">#{refundType},</if>
+            <if test="operateUser != null">#{operateUser},</if>
+            <if test="operateTime != null">#{operateTime},</if>
+            <if test="refundUser != null">#{refundUser},</if>
+            <if test="refundTime != null">#{refundTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="payNo != null">#{payNo},</if>
+            <if test="refundNo != null">#{refundNo},</if>
+            <if test="state != null">#{state},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePayTemp" parameterType="PayTemp">
+        update pay_temp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="resourceName != null">resource_name = #{resourceName},</if>
+            <if test="resourceId != null">resource_id = #{resourceId},</if>
+            <if test="block != null">block = #{block},</if>
+            <if test="feeItemId != null">fee_item_id = #{feeItemId},</if>
+            <if test="feeItemName != null and feeItemName != ''">fee_item_name = #{feeItemName},</if>
+            <if test="feeUser != null">fee_user = #{feeUser},</if>
+            <if test="amt != null">amt = #{amt},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="refundType != null">refund_type = #{refundType},</if>
+            <if test="operateUser != null">operate_user = #{operateUser},</if>
+            <if test="operateTime != null">operate_time = #{operateTime},</if>
+            <if test="refundUser != null">refund_user = #{refundUser},</if>
+            <if test="refundTime != null">refund_time = #{refundTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="payNo != null">pay_no = #{payNo},</if>
+            <if test="refundNo != null">refund_no = #{refundNo},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayTempById" parameterType="Long">
+        delete from pay_temp where id = #{id}
+    </delete>
+
+    <delete id="deletePayTempByIds" parameterType="String">
+        delete from pay_temp where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

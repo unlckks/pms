@@ -42,3 +42,10 @@ export function delHouse(id) {
     method: 'delete'
   })
 }
+//根据资源名查询资源列表
+export function getAllHouses() {
+  return request({
+    url: '/asset/house/getAllHouses',
+    method: 'get'
+  })
+}

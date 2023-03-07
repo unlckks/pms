@@ -24,8 +24,6 @@ public class AssetHouseServiceImpl implements IAssetHouseService
 {
     @Resource
     private AssetHouseMapper assetHouseMapper;
-    @Resource
-    private AssetBuildingMapper assetBuildingMapper;
     /**
      * 查询商铺管理
      * 
@@ -98,6 +96,16 @@ public class AssetHouseServiceImpl implements IAssetHouseService
     public int deleteAssetHouseById(Long id)
     {
         return assetHouseMapper.deleteAssetHouseById(id);
+    }
+
+    /**
+     * 查询所有资源不分页
+     * @return
+     */
+    @Override
+    public List<AssetHouse> queryAllHouses() {
+        AssetHouse assetHouse = new AssetHouse();
+        return this.assetHouseMapper.selectAssetHouseList(assetHouse);
     }
 
 

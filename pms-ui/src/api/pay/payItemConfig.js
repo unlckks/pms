@@ -42,3 +42,10 @@ export function delPayItemConfig(id) {
     method: 'delete'
   })
 }
+//根据项目类型查询收费项目
+export function getPayFeeItemByType(type) {
+  return request({
+    url: '/pay/payItemConfig/getPayFeeItemByType/'+type,
+    method: 'get'
+  })
+}

@@ -1,5 +1,7 @@
 package com.powernode.common.utils.uuid;
 
+import java.util.Random;
+
 /**
  * ID生成器工具类
  * 
@@ -7,6 +9,7 @@ package com.powernode.common.utils.uuid;
  */
 public class IdUtils
 {
+    private static Random random=new Random();
     /**
      * 获取随机UUID
      * 
@@ -45,5 +48,14 @@ public class IdUtils
     public static String fastSimpleUUID()
     {
         return UUID.fastUUID().toString(true);
+    }
+    /**
+     *
+     * 根据前缀+时间生成单号
+     *  生成规则PRE+时间戳+4个random
+     *
+     */
+    public static String createNoWithPrefix(String prefix){
+        return prefix+System.currentTimeMillis()+(random.nextInt(9000)+1000);
     }
 }
