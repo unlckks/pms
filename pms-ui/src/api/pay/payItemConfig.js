@@ -49,3 +49,30 @@ export function getPayFeeItemByType(type) {
     method: 'get'
   })
 }
+//根据类型查询已配置默认收费项目
+export function getDefaultPayFeeItemByType(type) {
+  return request({
+    url: '/pay/payItemConfig/getDefaultPayFeeItemByType/'+type,
+    method: 'get'
+  })
+}
+
+// 删除默认收费项目（根据收费项目ID和类型）
+export function delDefaultPayFeeItem(id,type) {
+  console.log(id,type)
+  return request({
+    url: '/pay/payItemConfig/delDefaultPayFeeItem/' + id+"/"+type,
+    method: 'delete'
+  })
+}
+// 新增默认收费项目管理
+export function addDefaultPayItemConfig(type,ids) {
+  let params="type="+type;//type=rented&ids=1&ids=2&ids=3
+  ids.filter(id=>{
+    params+="&ids="+id;
+  })
+  return request({
+    url: '/pay/payItemConfig/addDefaultPayItemConfig?'+params,
+    method: 'post'
+  })
+}

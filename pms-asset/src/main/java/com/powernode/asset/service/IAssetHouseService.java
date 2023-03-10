@@ -1,6 +1,7 @@
 package com.powernode.asset.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.powernode.asset.domain.AssetBuilding;
 import com.powernode.asset.domain.AssetHouse;
@@ -67,4 +68,10 @@ public interface IAssetHouseService
      */
     List<AssetHouse> queryAllHouses();
 
+    /**
+     * 根据houseID名查询资源和所有的信息
+     * @param houseId
+     * @return
+     */
+    Map<String, Object> queryAllResourceByHouseId(Long houseId);
 }

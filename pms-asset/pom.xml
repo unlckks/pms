@@ -21,6 +21,11 @@
             <groupId>com.powernode</groupId>
             <artifactId>pms-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.powernode</groupId>
+            <artifactId>pms-asset</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

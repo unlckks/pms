@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.park.mapper.ParkChargingRulesMapper">
+    
+    <resultMap type="ParkChargingRules" id="ParkChargingRulesResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="freeMin"    column="free_min"    />
+        <result property="firstMin"    column="first_min"    />
+        <result property="firstMoney"    column="first_money"    />
+        <result property="afterStepMin"    column="after_step_min"    />
+        <result property="afterStepMoney"    column="after_step_money"    />
+        <result property="lastMin"    column="last_min"    />
+        <result property="lastStepMin"    column="last_step_min"    />
+        <result property="lastStepMoney"    column="last_step_money"    />
+        <result property="maxMoney"    column="max_money"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectParkChargingRulesVo">
+        select id, name, free_min, first_min, first_money, after_step_min, after_step_money, last_min, last_step_min, last_step_money, max_money, del_flag, create_by, create_time, update_by, update_time from park_charging_rules
+    </sql>
+
+    <select id="selectParkChargingRulesList" parameterType="ParkChargingRules" resultMap="ParkChargingRulesResult">
+        <include refid="selectParkChargingRulesVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="firstMin != null "> and first_min = #{firstMin}</if>
+        </where>
+    </select>
+    
+    <select id="selectParkChargingRulesById" parameterType="String" resultMap="ParkChargingRulesResult">
+        <include refid="selectParkChargingRulesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertParkChargingRules" parameterType="ParkChargingRules">
+        insert into park_charging_rules
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="freeMin != null">free_min,</if>
+            <if test="firstMin != null">first_min,</if>
+            <if test="firstMoney != null">first_money,</if>
+            <if test="afterStepMin != null">after_step_min,</if>
+            <if test="afterStepMoney != null">after_step_money,</if>
+            <if test="lastMin != null">last_min,</if>
+            <if test="lastStepMin != null">last_step_min,</if>
+            <if test="lastStepMoney != null">last_step_money,</if>
+            <if test="maxMoney != null">max_money,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="freeMin != null">#{freeMin},</if>
+            <if test="firstMin != null">#{firstMin},</if>
+            <if test="firstMoney != null">#{firstMoney},</if>
+            <if test="afterStepMin != null">#{afterStepMin},</if>
+            <if test="afterStepMoney != null">#{afterStepMoney},</if>
+            <if test="lastMin != null">#{lastMin},</if>
+            <if test="lastStepMin != null">#{lastStepMin},</if>
+            <if test="lastStepMoney != null">#{lastStepMoney},</if>
+            <if test="maxMoney != null">#{maxMoney},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateParkChargingRules" parameterType="ParkChargingRules">
+        update park_charging_rules
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="freeMin != null">free_min = #{freeMin},</if>
+            <if test="firstMin != null">first_min = #{firstMin},</if>
+            <if test="firstMoney != null">first_money = #{firstMoney},</if>
+            <if test="afterStepMin != null">after_step_min = #{afterStepMin},</if>
+            <if test="afterStepMoney != null">after_step_money = #{afterStepMoney},</if>
+            <if test="lastMin != null">last_min = #{lastMin},</if>
+            <if test="lastStepMin != null">last_step_min = #{lastStepMin},</if>
+            <if test="lastStepMoney != null">last_step_money = #{lastStepMoney},</if>
+            <if test="maxMoney != null">max_money = #{maxMoney},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteParkChargingRulesById" parameterType="String">
+        delete from park_charging_rules where id = #{id}
+    </delete>
+
+    <delete id="deleteParkChargingRulesByIds" parameterType="String">
+        delete from park_charging_rules where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,6 +1,8 @@
 package com.powernode.pay.service.impl;
 
 import java.util.List;
+
+import com.powernode.common.core.domain.AjaxResult;
 import com.powernode.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -106,5 +108,31 @@ public class PayFeeItemServiceImpl implements IPayFeeItemService
         PayFeeItem payFeeItem=new PayFeeItem();
         payFeeItem.setType(type);
         return payFeeItemMapper.selectPayFeeItemList(payFeeItem);
+    }
+
+    /**
+     * 根据类型查询已配置默认收费项目
+     * @param type
+     * @return
+     */
+    @Override
+    public List<PayFeeItem> queryDefaultPayFeeItemByType(String type) {
+        return this.payFeeItemMapper.queryDefaultPayFeeItemByType(type);
+    }
+
+    /**
+     * 删除默认收费项目
+     * @param id
+     * @param type
+     * @return
+     */
+    @Override
+    public int deleteDefaultPayFeeItemByIdAndType(Long id, String type) {
+        return this.payFeeItemMapper.deleteDefaultPayFeeItemByIdAndType(id,type);
+    }
+
+    @Override
+    public int addDefaultPayItemConfig(String type, Long[] ids) {
+        return this.payFeeItemMapper.addDefaultPayItemConfig(type,ids);
     }
 }

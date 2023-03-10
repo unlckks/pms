@@ -30,6 +30,7 @@
         <poi.version>4.1.2</poi.version>
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.9.1</jwt.version>
+        <hutool.version>5.8.11</hutool.version>
     </properties>
 
     <!-- 依赖声明 -->
@@ -209,6 +210,14 @@
                 <artifactId>pms-stat</artifactId>
                 <version>${pms.version}</version>
             </dependency>
+
+            <!--hutool管理模块-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

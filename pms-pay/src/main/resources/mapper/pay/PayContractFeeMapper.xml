@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayContractFeeMapper">
+
+    <resultMap type="PayContractFee" id="PayContractFeeResult">
+        <result property="id"    column="id"    />
+        <result property="feeItemId"    column="fee_item_id"    />
+        <result property="contractId"    column="contract_id"    />
+        <result property="beginDate"    column="begin_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="nextBillDate"    column="next_bill_date"    />
+        <result property="times"    column="times"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPayContractFeeVo">
+        select id, fee_item_id, contract_id, begin_date, end_date, next_bill_date, times, create_by, create_time, update_by, update_time from pay_contract_fee
+    </sql>
+
+    <select id="selectPayContractFeeList" parameterType="PayContractFee" resultMap="PayContractFeeResult">
+        <include refid="selectPayContractFeeVo"/>
+        <where>
+            <if test="feeItemId != null "> and fee_item_id = #{feeItemId}</if>
+            <if test="contractId != null  and contractId != ''"> and contract_id = #{contractId}</if>
+            <if test="beginDate != null "> and begin_date = #{beginDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="nextBillDate != null "> and next_bill_date = #{nextBillDate}</if>
+            <if test="times != null "> and times = #{times}</if>
+        </where>
+    </select>
+
+    <select id="selectPayContractFeeById" parameterType="Long" resultMap="PayContractFeeResult">
+        <include refid="selectPayContractFeeVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPayContractFee" parameterType="PayContractFee" useGeneratedKeys="true" keyProperty="id">
+        insert into pay_contract_fee
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feeItemId != null">fee_item_id,</if>
+            <if test="contractId != null and contractId != ''">contract_id,</if>
+            <if test="beginDate != null">begin_date,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="nextBillDate != null">next_bill_date,</if>
+            <if test="times != null">times,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feeItemId != null">#{feeItemId},</if>
+            <if test="contractId != null and contractId != ''">#{contractId},</if>
+            <if test="beginDate != null">#{beginDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="nextBillDate != null">#{nextBillDate},</if>
+            <if test="times != null">#{times},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePayContractFee" parameterType="PayContractFee">
+        update pay_contract_fee
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="feeItemId != null">fee_item_id = #{feeItemId},</if>
+            <if test="contractId != null and contractId != ''">contract_id = #{contractId},</if>
+            <if test="beginDate != null">begin_date = #{beginDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="nextBillDate != null">next_bill_date = #{nextBillDate},</if>
+            <if test="times != null">times = #{times},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayContractFeeById" parameterType="Long">
+        delete from pay_contract_fee where id = #{id}
+    </delete>
+
+    <delete id="deletePayContractFeeByIds" parameterType="String">
+        delete from pay_contract_fee where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

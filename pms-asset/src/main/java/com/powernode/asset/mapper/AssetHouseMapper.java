@@ -1,7 +1,10 @@
 package com.powernode.asset.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import com.powernode.asset.domain.AssetHouse;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 商铺管理Mapper接口
@@ -58,4 +61,12 @@ public interface AssetHouseMapper
      * @return 结果
      */
     public int deleteAssetHouseByIds(Long[] ids);
+
+    /**
+     * 根据houseID名查询资源和所有的信息
+     *
+     * @param houseId
+     * @return
+     */
+    Map<String, Object> queryAllResourceByHouseId(@Param("houseId") Long houseId);
 }

@@ -79,6 +79,11 @@
             <artifactId>pms-pay</artifactId>
         </dependency>
 
+        <!--收费管理模块-->
+        <dependency>
+            <groupId>com.powernode</groupId>
+            <artifactId>pms-park</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

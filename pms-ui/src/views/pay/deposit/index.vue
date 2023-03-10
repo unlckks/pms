@@ -126,14 +126,16 @@
           >退款
           </el-button>
           <el-dropdown>
-            <span class="el-dropdown-link">
-              <el-button type="text" size="mini">打印
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </el-button>
+                                <span class="el-dropdown-link">
+                                    <el-button type="text" icon="el-icon-printer" size="mini">
+                                        打印
+                                        <i class="el-icon-arrow-down el-icon--right"></i>
+                                    </el-button>
                                 </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="handlePrint(scope.row.payNo)">打印收款单</el-dropdown-item>
-              <el-dropdown-item v-if="scope.row.state == 'refunded'" @click.native="handleRefundPrint(scope.row.refundNo)">
+              <el-dropdown-item v-if="scope.row.state == 'refunded'"
+                                @click.native="handleRefundPrint(scope.row.refundNo)">
                 打印退款单
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -220,7 +222,7 @@
 </template>
 
 <script>
-import {listDeposit, getDeposit,addDeposit,updateDeposit} from "@/api/pay/deposit";
+import {listDeposit, getDeposit, delDeposit, addDeposit,updateDeposit} from "@/api/pay/deposit";
 import {getPayFeeItemByType} from "@/api/pay/payItemConfig";
 import {getAllHouses} from "@/api/asset/house";
 

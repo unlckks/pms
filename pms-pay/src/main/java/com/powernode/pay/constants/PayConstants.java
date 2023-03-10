@@ -25,4 +25,22 @@ public interface PayConstants {
     //账户有金额
     String Y="Y";
 
+    //合同类型
+    String CONTRACT_TYPE_RENT = "rented";
+
+    //合同类型
+    String CONTRACT_TYPE_SALE = "sale";
+
+    //前缀-合同流水号
+    String PAY_PREFIX_HT="pay.prefix.ht";
+
+    //合同状态
+    String PAY_CONTRACT_STATE_1 = "1";//正常
+    String PAY_CONTRACT_STATE_2 = "2";//撤销
+    String PAY_CONTRACT_STATE_3 = "3";//结束
+
+    //商铺状态
+    String ASSET_HOUSE_STATE_RENTED="rented";
+    String ASSET_HOUSE_STATE_SALE="sale";
+    String ASSET_HOUSE_STATE_EMPTY="empty";
 }

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import {addPrestore} from "@/api/pay/prestore";
+import {addPrestore, updatePrestore} from "@/api/pay/prestore";
 import {getPayFeeItemByType} from "@/api/pay/payItemConfig";
 import SelectBox from "@/views/owner/user/selectBox";
 

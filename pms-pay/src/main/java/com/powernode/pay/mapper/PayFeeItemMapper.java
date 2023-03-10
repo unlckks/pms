@@ -1,7 +1,10 @@
 package com.powernode.pay.mapper;
 
 import java.util.List;
+
+import com.powernode.common.core.domain.AjaxResult;
 import com.powernode.pay.domain.PayFeeItem;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 收费项目管理Mapper接口
@@ -58,4 +61,29 @@ public interface PayFeeItemMapper
      * @return 结果
      */
     public int deletePayFeeItemByIds(Long[] ids);
+
+    /**
+     * 根据类型查询已配置默认收费项目
+     *
+     * @param type
+     * @return
+     */
+    List<PayFeeItem> queryDefaultPayFeeItemByType(@Param("type") String type);
+
+    /**
+     * 删除默认收费项目
+     * @param id
+     * @param type
+     * @return
+     */
+    int deleteDefaultPayFeeItemByIdAndType(@Param("id") Long id, @Param("type") String type);
+
+    /**
+     * 进行添加收费项目
+     *
+     * @param type
+     * @param ids
+     * @return
+     */
+    int addDefaultPayItemConfig(@Param("type") String type, @Param("ids") Long[] ids);
 }

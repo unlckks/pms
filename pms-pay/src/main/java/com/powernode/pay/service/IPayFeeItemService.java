@@ -1,6 +1,8 @@
 package com.powernode.pay.service;
 
 import java.util.List;
+
+import com.powernode.common.core.domain.AjaxResult;
 import com.powernode.pay.domain.PayFeeItem;
 
 /**
@@ -65,4 +67,27 @@ public interface IPayFeeItemService
      * @return
      */
     List<PayFeeItem> queryPayFeeItemByType(String type);
+
+    /**
+     * 根据类型查询已配置默认收费项目
+     * @param type
+     * @return
+     */
+    List<PayFeeItem> queryDefaultPayFeeItemByType(String type);
+
+    /**
+     * 删除默认收费项目
+     * @param id
+     * @param type
+     * @return
+     */
+    int deleteDefaultPayFeeItemByIdAndType(Long id, String type);
+
+    /**
+     * 进行保存
+     * @param type
+     * @param ids
+     * @return
+     */
+    int addDefaultPayItemConfig(String type, Long[] ids);
 }

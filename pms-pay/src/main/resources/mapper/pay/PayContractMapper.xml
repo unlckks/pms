@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayContractMapper">
+
+    <resultMap type="PayContract" id="PayContractResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="houseId"    column="house_id"    />
+        <result property="ownerId"    column="owner_id"    />
+        <result property="contractType"    column="contract_type"    />
+        <result property="rentFee"    column="rent_fee"    />
+        <result property="beginDate"    column="begin_date"    />
+        <result property="period"    column="period"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="userTrade"    column="user_trade"    />
+        <result property="userTradeDetail"    column="user_trade_detail"    />
+        <result property="state"    column="state"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPayContractVo">
+        select id, code, house_id, owner_id, contract_type, rent_fee, begin_date, period, end_date, user_trade, user_trade_detail, state, create_by, create_time, update_by, update_time from pay_contract
+    </sql>
+
+    <select id="selectPayContractList" parameterType="PayContract" resultMap="PayContractResult">
+        <include refid="selectPayContractVo"/>
+        <where>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="houseId != null "> and house_id = #{houseId}</if>
+            <if test="ownerId != null "> and owner_id = #{ownerId}</if>
+            <if test="contractType != null  and contractType != ''"> and contract_type = #{contractType}</if>
+            <if test="rentFee != null "> and rent_fee = #{rentFee}</if>
+            <if test="beginDate != null "> and begin_date = #{beginDate}</if>
+            <if test="period != null  and period != ''"> and period = #{period}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+            <if test="userTrade != null  and userTrade != ''"> and user_trade = #{userTrade}</if>
+            <if test="userTradeDetail != null  and userTradeDetail != ''"> and user_trade_detail = #{userTradeDetail}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+        </where>
+    </select>
+
+    <select id="selectPayContractById" parameterType="Long" resultMap="PayContractResult">
+        <include refid="selectPayContractVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPayContract" parameterType="PayContract" useGeneratedKeys="true" keyProperty="id">
+        insert into pay_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">code,</if>
+            <if test="houseId != null">house_id,</if>
+            <if test="ownerId != null">owner_id,</if>
+            <if test="contractType != null">contract_type,</if>
+            <if test="rentFee != null">rent_fee,</if>
+            <if test="beginDate != null">begin_date,</if>
+            <if test="period != null">period,</if>
+            <if test="endDate != null">end_date,</if>
+            <if test="userTrade != null">user_trade,</if>
+            <if test="userTradeDetail != null">user_trade_detail,</if>
+            <if test="state != null">state,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">#{code},</if>
+            <if test="houseId != null">#{houseId},</if>
+            <if test="ownerId != null">#{ownerId},</if>
+            <if test="contractType != null">#{contractType},</if>
+            <if test="rentFee != null">#{rentFee},</if>
+            <if test="beginDate != null">#{beginDate},</if>
+            <if test="period != null">#{period},</if>
+            <if test="endDate != null">#{endDate},</if>
+            <if test="userTrade != null">#{userTrade},</if>
+            <if test="userTradeDetail != null">#{userTradeDetail},</if>
+            <if test="state != null">#{state},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePayContract" parameterType="PayContract">
+        update pay_contract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null">code = #{code},</if>
+            <if test="houseId != null">house_id = #{houseId},</if>
+            <if test="ownerId != null">owner_id = #{ownerId},</if>
+            <if test="contractType != null">contract_type = #{contractType},</if>
+            <if test="rentFee != null">rent_fee = #{rentFee},</if>
+            <if test="beginDate != null">begin_date = #{beginDate},</if>
+            <if test="period != null">period = #{period},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+            <if test="userTrade != null">user_trade = #{userTrade},</if>
+            <if test="userTradeDetail != null">user_trade_detail = #{userTradeDetail},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayContractById" parameterType="Long">
+        delete from pay_contract where id = #{id}
+    </delete>
+
+    <delete id="deletePayContractByIds" parameterType="String">
+        delete from pay_contract where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <resultMap type="com.powernode.pay.entity.vo.ContractVo" id="PayAllContractResult">
+        <result property="resourceId" column="resource_id"/>
+        <result property="resourceName" column="resource_name"/>
+        <result property="state" column="state"/>
+        <result property="ownerId" column="owner_id"/>
+        <result property="ownerName" column="owner_name"/>
+        <result property="company" column="company"/>
+        <result property="phone" column="phone"/>
+        <result property="defaultRentFee" column="default_rent_fee"/>
+        <result property="rentFee" column="rent_fee"/>
+        <result property="userTrade" column="user_trade"/>
+        <result property="contractType" column="contract_type"/>
+        <result property="beginDate" column="begin_date"/>
+        <result property="period" column="period"/>
+        <result property="endDate" column="end_date"/>
+        <result property="code" column="code"/>
+        <result property="contractState" column="contractState"/>
+    </resultMap>
+    <!--查询所有合同-->
+    <select id="queryPayContractList" resultMap="PayAllContractResult">
+        select t1.id       as resource_id,
+        t1.name     as resource_name,
+        t1.state,
+        t2.owner_id as owner_id,
+        t3.username as owner_name,
+        t3.company,
+        t3.phone,
+        t1.rent_fee as default_rent_fee,
+        t2.rent_fee,
+        t2.user_trade,
+        t2.contract_type,
+        t2.begin_date,
+        t2.end_date,
+        t2.period,
+        t2.code ,
+        t2.state as contractState
+        from asset_house t1
+        left join pay_contract t2 on (t1.id = t2.house_id and t2.state !='2')
+        left join owner_user t3 on (t3.id = t2.owner_id)
+
+        <where>
+            <if test="ownerName != null and ownerName != ''">
+                and t3.username like concat('%', #{ownerName}, '%')
+            </if>
+            <if test="resourceName != null and resourceName != ''">
+                and t1.name like concat('%', #{resourceName}, '%')
+            </if>
+            <if test="state != null and state != ''">
+                and t1.state = #{state}
+            </if>
+        </where>
+        order by  t1.id asc
+    </select>
+
+    <!--根据合同编号查询合同信息-->
+    <select id="selectPayContractByCode" resultMap="PayContractResult">
+        <include refid="selectPayContractVo">
+        </include> where code =#{code}
+    </select>
+</mapper>

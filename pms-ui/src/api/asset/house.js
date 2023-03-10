@@ -49,3 +49,17 @@ export function getAllHouses() {
     method: 'get'
   })
 }
+//根据houseId名查询资源所有信息
+export function getAllResourceByHouseId(houseId) {
+  return request({
+    url: '/asset/house/getAllResourceByHouseId/'+houseId,
+    method: 'get'
+  })
+}
+// 根据合同编号查询当前合同所有收费项目
+export function getContractFeeItemsByCode(code) {
+  return request({
+    url: '/pay/contract/getContractFeeItemsByCode/'+code,
+    method: 'get'
+  })
+}

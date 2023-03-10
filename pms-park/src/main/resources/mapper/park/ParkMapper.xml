@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.park.mapper.ParkMapper">
+    
+    <resultMap type="Park" id="ParkResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="image"    column="image"    />
+        <result property="positionX"    column="position_x"    />
+        <result property="positionY"    column="position_y"    />
+        <result property="startBusinessHours"    column="start_business_hours"    />
+        <result property="endBusinessHours"    column="end_business_hours"    />
+        <result property="parkingSpaceNumber"    column="parking_space_number"    />
+        <result property="usedParkingSpaceNumber"    column="used_parking_space_number"    />
+        <result property="address"    column="address"    />
+        <result property="phone"    column="phone"    />
+        <result property="landline"    column="landline"    />
+        <result property="status"    column="status"    />
+        <result property="countryId"    column="country_id"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="stateOrCityId"    column="state_or_city_id"    />
+        <result property="zoneOrCountyId"    column="zone_or_county_id"    />
+        <result property="townshipId"    column="township_id"    />
+        <result property="ruleId"    column="rule_id"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectParkVo">
+        select id, name, image, position_x, position_y, start_business_hours, end_business_hours, parking_space_number, used_parking_space_number, address, phone, landline, status, country_id, province_id, state_or_city_id, zone_or_county_id, township_id, rule_id, del_flag, create_by, create_time, update_by, update_time from park
+    </sql>
+
+    <select id="selectParkList" parameterType="Park" resultMap="ParkResult">
+        <include refid="selectParkVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectParkById" parameterType="Long" resultMap="ParkResult">
+        <include refid="selectParkVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPark" parameterType="Park" useGeneratedKeys="true" keyProperty="id">
+        insert into park
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="image != null">image,</if>
+            <if test="positionX != null">position_x,</if>
+            <if test="positionY != null">position_y,</if>
+            <if test="startBusinessHours != null">start_business_hours,</if>
+            <if test="endBusinessHours != null">end_business_hours,</if>
+            <if test="parkingSpaceNumber != null">parking_space_number,</if>
+            <if test="usedParkingSpaceNumber != null">used_parking_space_number,</if>
+            <if test="address != null">address,</if>
+            <if test="phone != null">phone,</if>
+            <if test="landline != null">landline,</if>
+            <if test="status != null">status,</if>
+            <if test="countryId != null">country_id,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="stateOrCityId != null">state_or_city_id,</if>
+            <if test="zoneOrCountyId != null">zone_or_county_id,</if>
+            <if test="townshipId != null">township_id,</if>
+            <if test="ruleId != null">rule_id,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="image != null">#{image},</if>
+            <if test="positionX != null">#{positionX},</if>
+            <if test="positionY != null">#{positionY},</if>
+            <if test="startBusinessHours != null">#{startBusinessHours},</if>
+            <if test="endBusinessHours != null">#{endBusinessHours},</if>
+            <if test="parkingSpaceNumber != null">#{parkingSpaceNumber},</if>
+            <if test="usedParkingSpaceNumber != null">#{usedParkingSpaceNumber},</if>
+            <if test="address != null">#{address},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="landline != null">#{landline},</if>
+            <if test="status != null">#{status},</if>
+            <if test="countryId != null">#{countryId},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="stateOrCityId != null">#{stateOrCityId},</if>
+            <if test="zoneOrCountyId != null">#{zoneOrCountyId},</if>
+            <if test="townshipId != null">#{townshipId},</if>
+            <if test="ruleId != null">#{ruleId},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePark" parameterType="Park">
+        update park
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="positionX != null">position_x = #{positionX},</if>
+            <if test="positionY != null">position_y = #{positionY},</if>
+            <if test="startBusinessHours != null">start_business_hours = #{startBusinessHours},</if>
+            <if test="endBusinessHours != null">end_business_hours = #{endBusinessHours},</if>
+            <if test="parkingSpaceNumber != null">parking_space_number = #{parkingSpaceNumber},</if>
+            <if test="usedParkingSpaceNumber != null">used_parking_space_number = #{usedParkingSpaceNumber},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="landline != null">landline = #{landline},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="countryId != null">country_id = #{countryId},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="stateOrCityId != null">state_or_city_id = #{stateOrCityId},</if>
+            <if test="zoneOrCountyId != null">zone_or_county_id = #{zoneOrCountyId},</if>
+            <if test="townshipId != null">township_id = #{townshipId},</if>
+            <if test="ruleId != null">rule_id = #{ruleId},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteParkById" parameterType="Long">
+        delete from park where id = #{id}
+    </delete>
+
+    <delete id="deleteParkByIds" parameterType="String">
+        delete from park where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -99,7 +99,7 @@
           <span>{{ parseTime(scope.row.operateTime, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column  label="退款人" align="center" prop="refundUser" />
+      <el-table-column label="退款人" align="center" prop="refundUser" />
       <el-table-column label="退款时间" align="center" prop="refundTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.refundTime, '{y}-{m}-{d}') }}</span>
@@ -118,22 +118,14 @@
           <el-button
             size="mini"
             type="text"
-            :disabled="scope.row.state=='payed'"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row)"
-          >退款详情</el-button>
-          <el-button
-            size="mini"
-            type="text"
-            :disabled="scope.row.state=='refund'"
+            :disabled="scope.row.state=='refunded'"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
           >退款</el-button>
           <el-button
             size="mini"
             type="text"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row)"
+            icon="el-icon-printer"
           >打印</el-button>
         </template>
       </el-table-column>
@@ -148,7 +140,7 @@
     />
 
     <!-- 添加或修改临时收费对话框 -->
-    <el-dialog :title="title" center  :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="客户类型" v-if="isRefund==false">
           <el-radio-group v-model="form.userType">
@@ -195,7 +187,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="退款方式" prop="refundType" v-if="isRefund==true">
-          <el-select  v-model="form.refundType" placeholder="请选择付款方式">
+          <el-select v-model="form.refundType" placeholder="请选择付款方式">
             <el-option
               v-for="dict in dict.type.fee_method_options"
               :key="dict.value"
@@ -208,7 +200,7 @@
           <el-input v-model="form.remark" placeholder="请输入备注"/>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer" >
+      <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
       </div>
@@ -356,7 +348,7 @@ export default {
       this.title = "添加临时收费";
       this.isRefund=false;
     },
-    /** 退款按钮操作 */
+    /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
       const id = row.id || this.ids
@@ -371,6 +363,7 @@ export default {
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+
           if(this.form.id!=null){
             updateTemp(this.form).then(res=>{
               this.$modal.msgSuccess("退款成功");

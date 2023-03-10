@@ -1,6 +1,7 @@
 package com.powernode.asset.controller;
 
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.powernode.asset.domain.AssetBuilding;
@@ -118,5 +119,17 @@ public class AssetHouseController extends BaseController
     public AjaxResult getAllHouses(){
         List<AssetHouse> assetHouses=this.assetHouseService.queryAllHouses();
         return  AjaxResult.success(assetHouses);
+    }
+
+    /**
+     *根据houseID名查询资源和所有的信息
+     */
+    @GetMapping("getAllResourceByHouseId/{houseId}")
+    public  AjaxResult getAllResourceByHouseId(@PathVariable Long houseId){
+        if (houseId == null ){
+            return  AjaxResult.error("商铺ID不能为空!");
+        }
+        Map<String ,Object> data =this.assetHouseService.queryAllResourceByHouseId(houseId);
+        return  AjaxResult.success(data);
     }
 }

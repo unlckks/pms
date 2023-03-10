@@ -1,6 +1,7 @@
 package com.powernode.asset.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.powernode.asset.domain.AssetBuilding;
 import com.powernode.asset.mapper.AssetBuildingMapper;
@@ -106,6 +107,16 @@ public class AssetHouseServiceImpl implements IAssetHouseService
     public List<AssetHouse> queryAllHouses() {
         AssetHouse assetHouse = new AssetHouse();
         return this.assetHouseMapper.selectAssetHouseList(assetHouse);
+    }
+
+    /**
+     * 根据houseID名查询资源和所有的信息
+     * @param houseId
+     * @return
+     */
+    @Override
+    public Map<String, Object> queryAllResourceByHouseId(Long houseId) {
+        return this.assetHouseMapper.queryAllResourceByHouseId(houseId);
     }
 
 

@@ -3,38 +3,62 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.powernode.asset.mapper.AssetHouseMapper">
-
     <resultMap type="AssetHouse" id="AssetHouseResult">
-        <result property="id"    column="id"    />
-        <result property="code"    column="code"    />
-        <result property="name"    column="name"    />
-        <result property="blockId"    column="block_id"    />
-        <result property="buildingId"    column="building_id"    />
-        <result property="floor"    column="floor"    />
-        <result property="state"    column="state"    />
-        <result property="stateEndTime"    column="state_end_time"    />
-        <result property="stateCompany"    column="state_company"    />
-        <result property="buildingSquare"    column="building_square"    />
-        <result property="useSquare"    column="use_square"    />
-        <result property="rentFee"    column="rent_fee"    />
-        <result property="remark"    column="remark"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="updateBy"    column="update_by"    />
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="blockId" column="block_id"/>
+        <result property="buildingId" column="building_id"/>
+        <result property="floor" column="floor"/>
+        <result property="state" column="state"/>
+        <result property="stateEndTime" column="state_end_time"/>
+        <result property="stateCompany" column="state_company"/>
+        <result property="buildingSquare" column="building_square"/>
+        <result property="useSquare" column="use_square"/>
+        <result property="rentFee" column="rent_fee"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateBy" column="update_by"/>
     </resultMap>
 
     <sql id="selectAssetHouseVo">
-        select id, code, name, block_id, building_id, floor, state, state_end_time, state_company, building_square, use_square, rent_fee, remark, create_time, create_by, update_time, update_by from asset_house
+        select id,
+               code,
+               name,
+               block_id,
+               building_id,
+               floor,
+               state,
+               state_end_time,
+               state_company,
+               building_square,
+               use_square,
+               rent_fee,
+               remark,
+               create_time,
+               create_by,
+               update_time,
+               update_by
+        from asset_house
     </sql>
 
     <select id="selectAssetHouseList" parameterType="AssetHouse" resultMap="AssetHouseResult">
         <include refid="selectAssetHouseVo"/>
         <where>
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="blockId != null "> and block_id = #{blockId}</if>
-            <if test="buildingId != null "> and building_id = #{buildingId}</if>
-            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="name != null  and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="blockId != null">
+                and block_id = #{blockId}
+            </if>
+            <if test="buildingId != null">
+                and building_id = #{buildingId}
+            </if>
+            <if test="state != null  and state != ''">
+                and state = #{state}
+            </if>
         </where>
     </select>
 
@@ -46,74 +70,187 @@
     <insert id="insertAssetHouse" parameterType="AssetHouse" useGeneratedKeys="true" keyProperty="id">
         insert into asset_house
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="code != null">code,</if>
-            <if test="name != null">name,</if>
-            <if test="blockId != null">block_id,</if>
-            <if test="buildingId != null">building_id,</if>
-            <if test="floor != null">floor,</if>
-            <if test="state != null">state,</if>
-            <if test="stateEndTime != null">state_end_time,</if>
-            <if test="stateCompany != null">state_company,</if>
-            <if test="buildingSquare != null">building_square,</if>
-            <if test="useSquare != null">use_square,</if>
-            <if test="rentFee != null">rent_fee,</if>
-            <if test="remark != null">remark,</if>
-            <if test="createTime != null">create_time,</if>
-            <if test="createBy != null">create_by,</if>
-            <if test="updateTime != null">update_time,</if>
-            <if test="updateBy != null">update_by,</if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="blockId != null">
+                block_id,
+            </if>
+            <if test="buildingId != null">
+                building_id,
+            </if>
+            <if test="floor != null">
+                floor,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="stateEndTime != null">
+                state_end_time,
+            </if>
+            <if test="stateCompany != null">
+                state_company,
+            </if>
+            <if test="buildingSquare != null">
+                building_square,
+            </if>
+            <if test="useSquare != null">
+                use_square,
+            </if>
+            <if test="rentFee != null">
+                rent_fee,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="code != null">#{code},</if>
-            <if test="name != null">#{name},</if>
-            <if test="blockId != null">#{blockId},</if>
-            <if test="buildingId != null">#{buildingId},</if>
-            <if test="floor != null">#{floor},</if>
-            <if test="state != null">#{state},</if>
-            <if test="stateEndTime != null">#{stateEndTime},</if>
-            <if test="stateCompany != null">#{stateCompany},</if>
-            <if test="buildingSquare != null">#{buildingSquare},</if>
-            <if test="useSquare != null">#{useSquare},</if>
-            <if test="rentFee != null">#{rentFee},</if>
-            <if test="remark != null">#{remark},</if>
-            <if test="createTime != null">#{createTime},</if>
-            <if test="createBy != null">#{createBy},</if>
-            <if test="updateTime != null">#{updateTime},</if>
-            <if test="updateBy != null">#{updateBy},</if>
+            <if test="code != null">
+                #{code},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="blockId != null">
+                #{blockId},
+            </if>
+            <if test="buildingId != null">
+                #{buildingId},
+            </if>
+            <if test="floor != null">
+                #{floor},
+            </if>
+            <if test="state != null">
+                #{state},
+            </if>
+            <if test="stateEndTime != null">
+                #{stateEndTime},
+            </if>
+            <if test="stateCompany != null">
+                #{stateCompany},
+            </if>
+            <if test="buildingSquare != null">
+                #{buildingSquare},
+            </if>
+            <if test="useSquare != null">
+                #{useSquare},
+            </if>
+            <if test="rentFee != null">
+                #{rentFee},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="createBy != null">
+                #{createBy},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy},
+            </if>
         </trim>
     </insert>
 
     <update id="updateAssetHouse" parameterType="AssetHouse">
         update asset_house
         <trim prefix="SET" suffixOverrides=",">
-            <if test="code != null">code = #{code},</if>
-            <if test="name != null">name = #{name},</if>
-            <if test="blockId != null">block_id = #{blockId},</if>
-            <if test="buildingId != null">building_id = #{buildingId},</if>
-            <if test="floor != null">floor = #{floor},</if>
-            <if test="state != null">state = #{state},</if>
-            <if test="stateEndTime != null">state_end_time = #{stateEndTime},</if>
-            <if test="stateCompany != null">state_company = #{stateCompany},</if>
-            <if test="buildingSquare != null">building_square = #{buildingSquare},</if>
-            <if test="useSquare != null">use_square = #{useSquare},</if>
-            <if test="rentFee != null">rent_fee = #{rentFee},</if>
-            <if test="remark != null">remark = #{remark},</if>
-            <if test="createTime != null">create_time = #{createTime},</if>
-            <if test="createBy != null">create_by = #{createBy},</if>
-            <if test="updateTime != null">update_time = #{updateTime},</if>
-            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="blockId != null">
+                block_id = #{blockId},
+            </if>
+            <if test="buildingId != null">
+                building_id = #{buildingId},
+            </if>
+            <if test="floor != null">
+                floor = #{floor},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+            <if test="stateEndTime != null">
+                state_end_time = #{stateEndTime},
+            </if>
+            <if test="stateCompany != null">
+                state_company = #{stateCompany},
+            </if>
+            <if test="buildingSquare != null">
+                building_square = #{buildingSquare},
+            </if>
+            <if test="useSquare != null">
+                use_square = #{useSquare},
+            </if>
+            <if test="rentFee != null">
+                rent_fee = #{rentFee},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
         </trim>
         where id = #{id}
     </update>
 
     <delete id="deleteAssetHouseById" parameterType="Long">
-        delete from asset_house where id = #{id}
+        delete
+        from asset_house
+        where id = #{id}
     </delete>
 
     <delete id="deleteAssetHouseByIds" parameterType="String">
-        delete from asset_house where id in
+        delete
+        from asset_house where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </delete>
+    <!--根据houseID名查询资源和所有的信息-->
+    <select id="queryAllResourceByHouseId" resultType="java.util.Map">
+        select t1.code,
+               t1.name as houseName,
+               t1.floor,
+               t2.name as buildingName,
+               t3.name as blockName,
+               t3.address
+        from asset_house t1
+                 inner join asset_building t2
+                 inner join asset_house_block t3
+                            on (t1.block_id = t3.id and t1.building_id = t2.id)
+        where t1.id = #{houseId}
+    </select>
 </mapper>

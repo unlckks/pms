@@ -17,10 +17,22 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>com.powernode</groupId>
             <artifactId>pms-system</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.powernode</groupId>
+            <artifactId>pms-owner</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.powernode</groupId>
+            <artifactId>pms-asset</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

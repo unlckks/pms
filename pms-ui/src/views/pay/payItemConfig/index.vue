@@ -49,39 +49,39 @@
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="payItemConfigList">
+    <el-table border v-loading="loading" :data="payItemConfigList">
       <el-table-column label="ID" align="center" prop="id" />
-      <el-table-column label="收费项分类" align="center" prop="type" >
+      <el-table-column label="收费项分类"  width="150" align="center" prop="type" >
         <template slot-scope="scope">
           <dict-tag :options="dict.type.fee_type_options" :value="scope.row.type"/>
         </template>
       </el-table-column>
-      <el-table-column label="收费项目名" align="center" prop="name" />
-      <el-table-column label="单价" align="center" prop="price" />
-      <el-table-column label="数量类型" align="center" prop="numType">
+      <el-table-column label="收费项目名"  width="150" align="center" prop="name" />
+      <el-table-column label="单价"  width="150" align="center" prop="price" />
+      <el-table-column label="数量类型"  width="150" align="center" prop="numType">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.fee_num_type_options" :value="scope.row.numType"/>
         </template>
       </el-table-column>
-      <el-table-column label="费用周期" align="center" prop="per1iod">
+      <el-table-column label="费用周期"  width="150" align="center" prop="period">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.fee_period_options" :value="scope.row.period"/>
         </template>
       </el-table-column>
-      <el-table-column label="费用公式" align="center" prop="formula">
+      <el-table-column label="费用公式"  width="150" align="center" prop="formula">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.fee_formula_options" :value="scope.row.formula"/>
         </template>
       </el-table-column>
-      <el-table-column label="自定义" align="center" prop="formulaExpression" />
-      <el-table-column label="是否产生滞纳金" align="center" prop="lateFeeEnable">
+      <el-table-column label="自定义"  width="150" align="center" prop="formulaExpression" />
+      <el-table-column label="是否产生滞纳金"  width="150" align="center" prop="lateFeeEnable">
         <template slot-scope="scope">
           <dict-tag :options="dict.type.fee_late_enable_options" :value="scope.row.lateFeeEnable"/>
         </template>
       </el-table-column>
-      <el-table-column label="滞纳金延迟多久收" align="center" prop="lateFeeDays" />
-      <el-table-column label="滞纳金比例(%)" align="center" prop="lateFeeRate" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="滞纳金延迟多久收"  width="150" align="center" prop="lateFeeDays" />
+      <el-table-column label="滞纳金比例(%)"  width="150" align="center" prop="lateFeeRate"/>
+      <el-table-column label="操作" align="center" width="150" fixed="right" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -125,10 +125,10 @@
         <el-form-item label="收费项目名" prop="name">
           <el-input v-model="form.name" placeholder="请输入收费项目名" />
         </el-form-item>
-        <el-form-item label="单价" prop="price" v-if="form.type=='house'">
+        <el-form-item label="单价" prop="price">
           <el-input v-model="form.price" placeholder="请输入单价" />
         </el-form-item>
-        <el-form-item label="数量类型" prop="numType" v-if="form.type=='house'">
+        <el-form-item label="数量类型" prop="numType">
           <el-select v-model="form.numType" placeholder="请选择数量类型">
             <el-option
               v-for="dict in dict.type.fee_num_type_options"
