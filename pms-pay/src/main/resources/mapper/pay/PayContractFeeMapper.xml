@@ -94,4 +94,12 @@
             #{id}
         </foreach>
     </delete>
+    <!--根据收费ID查询当前合同的收费项目集合-->
+    <select id="queryPayContractFeeByContractIdAndItemIds" resultMap="PayContractFeeResult">
+        <include refid="selectPayContractFeeVo">
+        </include> where  contract_id =#{id} and fee_item_id
+        <foreach collection="ids" item="itemId" open="in (" close=")" separator=",">
+            #{itemId}
+        </foreach>
+    </select>
 </mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayOrderMapper">
+
+    <resultMap type="PayOrder" id="PayOrderResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="payTime"    column="pay_time"    />
+        <result property="price"    column="price"    />
+        <result property="num"    column="num"    />
+        <result property="amt"    column="amt"    />
+        <result property="payType"    column="pay_type"    />
+        <result property="payState"    column="pay_state"    />
+        <result property="houseId"    column="house_id"    />
+        <result property="contractCode"    column="contract_code"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectPayOrderVo">
+        select id, order_id, item_name, begin_time, end_time, pay_time, price, num, amt, pay_type, pay_state, house_id, contract_code, create_time, create_by, update_time, update_by from pay_order
+    </sql>
+
+    <select id="selectPayOrderList" parameterType="PayOrder" resultMap="PayOrderResult">
+        <include refid="selectPayOrderVo"/>
+        <where>
+            <if test="orderId != null  and orderId != ''"> and order_id = #{orderId}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+            <if test="payTime != null "> and pay_time = #{payTime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="amt != null "> and amt = #{amt}</if>
+            <if test="payType != null  and payType != ''"> and pay_type = #{payType}</if>
+            <if test="payState != null  and payState != ''"> and pay_state = #{payState}</if>
+            <if test="houseId != null "> and house_id = #{houseId}</if>
+            <if test="contractCode != null  and contractCode != ''"> and contract_code = #{contractCode}</if>
+        </where>
+    </select>
+
+    <select id="selectPayOrderById" parameterType="Long" resultMap="PayOrderResult">
+        <include refid="selectPayOrderVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertPayOrder" parameterType="PayOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into pay_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="itemName != null">item_name,</if>
+            <if test="beginTime != null">begin_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="payTime != null">pay_time,</if>
+            <if test="price != null">price,</if>
+            <if test="num != null">num,</if>
+            <if test="amt != null">amt,</if>
+            <if test="payType != null">pay_type,</if>
+            <if test="payState != null">pay_state,</if>
+            <if test="houseId != null">house_id,</if>
+            <if test="contractCode != null">contract_code,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="updateBy != null">update_by,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="itemName != null">#{itemName},</if>
+            <if test="beginTime != null">#{beginTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="payTime != null">#{payTime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="num != null">#{num},</if>
+            <if test="amt != null">#{amt},</if>
+            <if test="payType != null">#{payType},</if>
+            <if test="payState != null">#{payState},</if>
+            <if test="houseId != null">#{houseId},</if>
+            <if test="contractCode != null">#{contractCode},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePayOrder" parameterType="PayOrder">
+        update pay_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="itemName != null">item_name = #{itemName},</if>
+            <if test="beginTime != null">begin_time = #{beginTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="payTime != null">pay_time = #{payTime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="amt != null">amt = #{amt},</if>
+            <if test="payType != null">pay_type = #{payType},</if>
+            <if test="payState != null">pay_state = #{payState},</if>
+            <if test="houseId != null">house_id = #{houseId},</if>
+            <if test="contractCode != null">contract_code = #{contractCode},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePayOrderById" parameterType="Long">
+        delete from pay_order where id = #{id}
+    </delete>
+
+    <delete id="deletePayOrderByIds" parameterType="String">
+        delete from pay_order where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

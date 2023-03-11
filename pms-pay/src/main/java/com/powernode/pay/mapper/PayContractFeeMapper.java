@@ -2,6 +2,7 @@ package com.powernode.pay.mapper;
 
 import java.util.List;
 import com.powernode.pay.domain.PayContractFee;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 合同收费项目Mapper接口
@@ -58,4 +59,13 @@ public interface PayContractFeeMapper
      * @return 结果
      */
     public int deletePayContractFeeByIds(Long[] ids);
+
+    /**
+     * 根据收费ID查询当前合同的收费项目集合
+     *
+     * @param id
+     * @param ids
+     * @return
+     */
+    List<PayContractFee> queryPayContractFeeByContractIdAndItemIds(@Param("id") Long id, @Param("ids") long[] ids);
 }

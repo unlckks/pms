@@ -90,4 +90,6 @@ public interface IPayFeeItemService
      * @return
      */
     int addDefaultPayItemConfig(String type, Long[] ids);
+
+    List<PayFeeItem> queryContractFeeItemsByContractId(Long id);
 }

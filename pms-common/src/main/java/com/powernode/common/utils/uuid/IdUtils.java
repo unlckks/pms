@@ -58,4 +58,12 @@ public class IdUtils
     public static String createNoWithPrefix(String prefix){
         return prefix+System.currentTimeMillis()+(random.nextInt(9000)+1000);
     }
+
+    /**
+     * 时间生成单号number
+     * @return
+     */
+    public static long createNumber(){
+      return  System.currentTimeMillis()+(random.nextInt(9000)+1000);
+    }
 }

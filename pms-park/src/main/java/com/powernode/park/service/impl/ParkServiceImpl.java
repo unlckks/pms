@@ -8,16 +8,18 @@ import com.powernode.park.mapper.ParkMapper;
 import com.powernode.park.domain.Park;
 import com.powernode.park.service.IParkService;
 
+import javax.annotation.Resource;
+
 /**
  * 停车场Service业务层处理
  * 
- * @author powernode
+ * @author mingyun
  * @date 2023-03-08
  */
 @Service
 public class ParkServiceImpl implements IParkService 
 {
-    @Autowired
+    @Resource
     private ParkMapper parkMapper;
 
     /**
@@ -92,5 +94,15 @@ public class ParkServiceImpl implements IParkService
     public int deleteParkById(Long id)
     {
         return parkMapper.deleteParkById(id);
+    }
+
+    /**
+     * 查询所有停车场不分页
+     *
+     * @return
+     */
+    @Override
+    public List<Park> getAllPark() {
+        return  this.selectParkList(new Park());
     }
 }

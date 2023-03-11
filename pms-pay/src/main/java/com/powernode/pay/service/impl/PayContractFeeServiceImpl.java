@@ -8,6 +8,8 @@ import com.powernode.pay.mapper.PayContractFeeMapper;
 import com.powernode.pay.domain.PayContractFee;
 import com.powernode.pay.service.IPayContractFeeService;
 
+import javax.annotation.Resource;
+
 /**
  * 合同收费项目Service业务层处理
  * 
@@ -17,7 +19,7 @@ import com.powernode.pay.service.IPayContractFeeService;
 @Service
 public class PayContractFeeServiceImpl implements IPayContractFeeService 
 {
-    @Autowired
+    @Resource
     private PayContractFeeMapper payContractFeeMapper;
 
     /**

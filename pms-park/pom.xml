@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>com.powernode</groupId>
-            <artifactId>pms-common</artifactId>
+            <artifactId>pms-system</artifactId>
         </dependency>
     </dependencies>
 </project>

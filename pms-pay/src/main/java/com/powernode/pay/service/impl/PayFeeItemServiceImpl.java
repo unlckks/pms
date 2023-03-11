@@ -131,8 +131,24 @@ public class PayFeeItemServiceImpl implements IPayFeeItemService
         return this.payFeeItemMapper.deleteDefaultPayFeeItemByIdAndType(id,type);
     }
 
+    /**
+     * 进行保存
+     * @param type
+     * @param ids
+     * @return
+     */
     @Override
     public int addDefaultPayItemConfig(String type, Long[] ids) {
         return this.payFeeItemMapper.addDefaultPayItemConfig(type,ids);
+    }
+
+    /**
+     * 根据合同编号查询当前合同所有收费项目
+     * @param id
+     * @return
+     */
+    @Override
+    public List<PayFeeItem> queryContractFeeItemsByContractId(Long id) {
+        return this.payFeeItemMapper.queryContractFeeItemsByContractId(id);
     }
 }

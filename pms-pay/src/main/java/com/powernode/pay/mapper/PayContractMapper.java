@@ -2,6 +2,7 @@ package com.powernode.pay.mapper;
 
 import java.util.List;
 import com.powernode.pay.domain.PayContract;
+import com.powernode.pay.entity.query.ContractQuery;
 import com.powernode.pay.entity.vo.ContractVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,10 +38,22 @@ public interface PayContractMapper
     int updatePayContract(PayContract payContract);
 
     /**
-     * 通过code查询合同
+     * 查询可生成的编号
      *
      * @param code
      * @return
      */
     PayContract selectPayContractByCode(@Param("code") String code);
+
+    List<ContractVo> queryBillPayContractList(ContractQuery contractQuery);
+
+    /**
+     * 据商铺ID和状态查询合同信息
+     *
+     * @param houseId
+     * @param contractState
+     * @return
+     */
+    PayContract selectPayContractByHouseId(@Param("houseId") Long houseId, @Param("contractState") String contractState);
+
 }

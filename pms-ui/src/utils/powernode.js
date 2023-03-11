@@ -233,16 +233,32 @@ export function blobValidate(data) {
   return data.type !== 'application/json'
 }
 
-//进行处理商圈和楼栋数据.转成级联选择器选择需要的数据
-export function handleBlockAndBuildingData(blockList,buildingList){
+//处理商圈和楼栋数据。转成级联选择器需要的数据
+export function handleBlockAndBuildingData(blockList,buildingList,houseList){
+
   let arr=new Array();
   blockList.filter(block=>{
     let obj={label:block.name,value:block.id};
     let children=new  Array();
     buildingList.filter(building=>{
+      let buildChildren=new Array();
+      let buildObj={};
       if(block.id==building.blockId){
-        children.push({value:building.id,label:building.name})
+        buildObj={value:building.id,label:building.name}
+        children.push(buildObj)
       }
+      //添加的第三层代码开始
+      if (houseList){
+        houseList.filter(house=>{
+          if(house.buildingId==building.id){
+            buildChildren.push({value:house.id,label:house.code})
+          }
+        })
+      }
+      if(buildChildren.length!=0){
+        buildObj.children=buildChildren
+      }
+      //添加的第三层代码结束
     })
     obj.children=children;
     arr.push(obj);

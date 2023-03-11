@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.park.mapper.ParkCheckpointMapper">
+
+    <resultMap type="ParkCheckpoint" id="ParkCheckpointResult">
+        <result property="id"    column="id"    />
+        <result property="code"    column="code"    />
+        <result property="name"    column="name"    />
+        <result property="carParkId"    column="car_park_id"    />
+        <result property="carParkName"    column="car_park_name"    />
+        <result property="positionX"    column="position_x"    />
+        <result property="positionY"    column="position_y"    />
+        <result property="positionDescribe"    column="position_describe"    />
+        <result property="floor"    column="floor"    />
+        <result property="mode"    column="mode"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectParkCheckpointVo">
+        select id, code, name, car_park_id, car_park_name, position_x, position_y, position_describe, floor, mode, status, del_flag, create_by, create_time, update_by, update_time from park_checkpoint
+    </sql>
+
+    <select id="selectParkCheckpointList" parameterType="ParkCheckpoint" resultMap="ParkCheckpointResult">
+        <include refid="selectParkCheckpointVo"/>
+        <where>
+            <if test="code != null "> and code = #{code}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectParkCheckpointById" parameterType="Long" resultMap="ParkCheckpointResult">
+        <include refid="selectParkCheckpointVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertParkCheckpoint" parameterType="ParkCheckpoint" useGeneratedKeys="true" keyProperty="id">
+        insert into park_checkpoint
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code != null">code,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="carParkId != null">car_park_id,</if>
+            <if test="carParkName != null and carParkName != ''">car_park_name,</if>
+            <if test="positionX != null">position_x,</if>
+            <if test="positionY != null">position_y,</if>
+            <if test="positionDescribe != null">position_describe,</if>
+            <if test="floor != null">floor,</if>
+            <if test="mode != null">mode,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code != null">#{code},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="carParkId != null">#{carParkId},</if>
+            <if test="carParkName != null and carParkName != ''">#{carParkName},</if>
+            <if test="positionX != null">#{positionX},</if>
+            <if test="positionY != null">#{positionY},</if>
+            <if test="positionDescribe != null">#{positionDescribe},</if>
+            <if test="floor != null">#{floor},</if>
+            <if test="mode != null">#{mode},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateParkCheckpoint" parameterType="ParkCheckpoint">
+        update park_checkpoint
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null">code = #{code},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="carParkId != null">car_park_id = #{carParkId},</if>
+            <if test="carParkName != null and carParkName != ''">car_park_name = #{carParkName},</if>
+            <if test="positionX != null">position_x = #{positionX},</if>
+            <if test="positionY != null">position_y = #{positionY},</if>
+            <if test="positionDescribe != null">position_describe = #{positionDescribe},</if>
+            <if test="floor != null">floor = #{floor},</if>
+            <if test="mode != null">mode = #{mode},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteParkCheckpointById" parameterType="Long">
+        delete from park_checkpoint where id = #{id}
+    </delete>
+
+    <delete id="deleteParkCheckpointByIds" parameterType="String">
+        delete from park_checkpoint where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

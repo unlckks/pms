@@ -1,7 +1,11 @@
 package com.powernode.pay.service;
 
 import java.util.List;
+
+import com.powernode.pay.domain.PayContract;
+import com.powernode.pay.domain.PayFeeItem;
 import com.powernode.pay.entity.dto.ContractDto;
+import com.powernode.pay.entity.query.ContractQuery;
 import com.powernode.pay.entity.vo.ContractVo;
 
 /**
@@ -31,5 +35,28 @@ public interface IPayContractService
      * @return
      */
     int cancelContractByCode(String code);
+
+    /**
+     * 查询可生成的编号
+     * @param contractQuery
+     * @return
+     */
+    List<ContractVo> selectBillPayContractList(ContractQuery contractQuery);
+
+    /**
+     * 根据合同编号查询当前合同所有收费项目
+     * @param code
+     * @return
+     */
+    PayContract queryPayContractByCode(String code);
+
+    /**
+     * 根据商铺ID有关当前商铺的所有信息
+     * @param houseId
+     * @param payContractState2
+     * @return
+     */
+    PayContract selectPayContractByHouseId(Long houseId, String payContractState2);
+
 
 }

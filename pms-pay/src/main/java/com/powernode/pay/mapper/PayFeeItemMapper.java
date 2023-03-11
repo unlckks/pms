@@ -86,4 +86,19 @@ public interface PayFeeItemMapper
      * @return
      */
     int addDefaultPayItemConfig(@Param("type") String type, @Param("ids") Long[] ids);
+
+    /**
+     * 根据合同编号查询当前合同所有收费项目
+     * @param id
+     * @return
+     */
+    List<PayFeeItem> queryContractFeeItemsByContractId(@Param("id") Long id);
+
+    /**
+     * 根据收费id查询收费项目详情
+     *
+     * @param ids
+     * @return
+     */
+    List<PayFeeItem> queryPayFeeItemsByIds(@Param("ids") long[] ids);
 }

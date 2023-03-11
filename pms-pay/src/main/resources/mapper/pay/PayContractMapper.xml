@@ -178,4 +178,44 @@
         <include refid="selectPayContractVo">
         </include> where code =#{code}
     </select>
+    <!--查询可生成的编号-->
+    <select id="queryBillPayContractList" resultMap="PayAllContractResult">
+        select t1.id       as resource_id,
+        t1.name     as resource_name,
+        t1.state,
+        t2.owner_id as owner_id,
+        t3.username as owner_name,
+        t3.company,
+        t3.phone,
+        t1.rent_fee as default_rent_fee,
+        t2.rent_fee,
+        t2.user_trade,
+        t2.contract_type,
+        t2.begin_date,
+        t2.end_date,
+        t2.period,
+        t2.code ,
+        t2.state as contractState
+        from asset_house t1
+        inner join pay_contract t2 on (t1.id = t2.house_id and t2.state !='2')
+        inner join owner_user t3 on (t3.id = t2.owner_id)
+
+        <where>
+            <if test="ownerName != null and ownerName != ''">
+                and t3.username like concat('%', #{ownerName}, '%')
+            </if>
+            <if test="resourceName != null and resourceName != ''">
+                and t1.name like concat('%', #{resourceName}, '%')
+            </if>
+            <if test="state != null and state != ''">
+                and t1.state = #{state}
+            </if>
+        </where>
+        order by  t1.id asc
+    </select>
+    <!--据商铺ID和状态查询合同信息-->
+    <select id="selectPayContractByHouseId" resultMap="PayContractResult">
+        <include refid="selectPayContractVo">
+        </include> where house_id=#{houseId} and state=#{contractState}
+    </select>
 </mapper>

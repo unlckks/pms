@@ -58,4 +58,11 @@ public interface IParkService
      * @return 结果
      */
     public int deleteParkById(Long id);
+
+    /**
+     * 查询所有停车场不分页
+     * @return
+     */
+    List<Park> getAllPark();
+
 }

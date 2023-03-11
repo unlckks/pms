@@ -58,4 +58,6 @@ public interface ParkMapper
      * @return 结果
      */
     public int deleteParkByIds(Long[] ids);
+
+
 }

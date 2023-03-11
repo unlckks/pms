@@ -2,6 +2,8 @@ package com.powernode.park.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.powernode.park.domain.ParkCheckpoint;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -100,5 +102,14 @@ public class ParkController extends BaseController
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(parkService.deleteParkByIds(ids));
+    }
+
+    /**
+     * 查询所有停车场不分页
+     */
+    @GetMapping("getAllPark")
+    public AjaxResult getAllPark(){
+        List<Park>   park = this.parkService.getAllPark();
+        return AjaxResult.success(park);
     }
 }

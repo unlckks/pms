@@ -42,12 +42,10 @@ export function delPark(id) {
     method: 'delete'
   })
 }
-
-// 导出停车场
-export function exportPark(query) {
+//查询所有停车场不分页
+export function getAllPark() {
   return request({
-    url: '/park/park/export',
-    method: 'get',
-    params: query
+    url: '/park/park/getAllPark/',
+    method: 'get'
   })
 }

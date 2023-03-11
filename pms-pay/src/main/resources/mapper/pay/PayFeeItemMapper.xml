@@ -242,15 +242,36 @@
                  inner join pay_fee_setting t2 on (t1.id = t2.fee_item_id)
         where t2.type = #{type}
     </select>
-<!--进行删除收费项目-->
+    <!--进行删除收费项目-->
     <delete id="deleteDefaultPayFeeItemByIdAndType">
-        delete  from  pay_fee_setting where  fee_item_id =#{id} and type=#{type}
+        delete
+        from pay_fee_setting
+        where fee_item_id = #{id}
+          and type = #{type}
     </delete>
     <!--进行保存收费项目-->
     <insert id="addDefaultPayItemConfig">
-        insert into  pay_fee_setting(fee_item_id, type) VALUES
+        insert into pay_fee_setting(fee_item_id, type) VALUES
         <foreach collection="ids" separator="," item="id">
-                (#{id},#{type})
+            (#{id},#{type})
         </foreach>
     </insert>
+
+    <select id="queryContractFeeItemsByContractId" resultMap="PayFeeItemResult">
+        select *
+        from pay_fee_item t1
+                 inner join pay_contract_fee t2
+                            on (t1.id = t2.fee_item_id)
+        where t2.contract_id = #{id}
+          and t2.next_bill_date <![CDATA[<=]]> NOW()
+    </select>
+    <!--根据收费id查询收费项目详情-->
+    <select id="queryPayFeeItemsByIds" resultMap="PayFeeItemResult">
+        <include refid="selectPayFeeItemVo">
+        </include>
+        where id
+        <foreach collection="ids" item="id" open=" in (" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

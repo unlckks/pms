@@ -63,5 +63,5 @@ public interface IAssetHouseBlockService
      * 查询所有商圈不分页
      * @return
      */
-    List<AssetHouseBlock> queryAllBlock();
+    List<AssetHouseBlock>  queryAllBlock();
 }
