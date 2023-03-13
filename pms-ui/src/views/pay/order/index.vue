@@ -169,19 +169,21 @@
         type="primary"
         plain
         icon="el-icon-plus"
+        @click="handlePayBill"
         style="margin-bottom: 5px"
       >收费</el-button>
       <el-table border  show-summary  center :data="payOrderList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
-        <el-table-column prop="itemName" label="收费项名称" align="left"></el-table-column>
-        <el-table-column prop="beginTime" label="起收日期" align="left" />
-        <el-table-column prop="endTime" label="结束日期" align="left" />
-        <el-table-column prop="endTime" label="缴费限期" align="left" />
-        <el-table-column prop="price" label="单价" align="left" />
-        <el-table-column label="数量" prop="num" algin="left" />
-        <el-table-column label="金额" prop="amt" algin="left" />
+        <el-table-column prop="itemName" label="收费项名称" align="center" />
+        <el-table-column prop="beginTime" label="起收日期" align="center" />
+        <el-table-column prop="endTime" label="结束日期" align="center" />
+        <el-table-column prop="endTime" label="缴费限期" align="center" />
+        <el-table-column prop="price" label="单价" align="center" />
+        <el-table-column prop="num" label="数量"algin="center" />
+        <el-table-column prop="amt" label="金额" algin="center" />
       </el-table>
     </el-card>
+    <pay-bill @select="search" ref="payBill" v-if="payBillVisible"></pay-bill>
   </div>
 </template>
 
@@ -190,9 +192,13 @@ import { getAllBlock } from '@/api/asset/houseBlock'
 import { getAllBuilding } from '@/api/asset/building'
 import { getAllHouses } from '@/api/asset/house'
 import { getAllContentByHouseId } from '@/api/pay/order'
+import payBill from "./pay-bill"
 
 export default {
   dicts: ['pay_contract_type','pay_contract_state'],
+  components:{
+    payBill
+  },
   data() {
     return {
       queryParams:{
@@ -221,7 +227,11 @@ export default {
       //是否至少有一个选中
       disabled:false,
       //是否显示
-      showContent:false
+      showContent:false,
+      //选中的收费项目
+      multipleSelection:[],
+      //是否显示收费的弹出层
+      payBillVisible:false
     }
   },
   computed: {},
@@ -268,7 +278,23 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.disabled = !selection.length
+      this.multipleSelection=selection
     },
+    //打开收费的弹出层
+    handlePayBill(){
+      if (this.multipleSelection.length > 0) {
+        this.payBillVisible = true;
+        this.$nextTick(() => {
+          this.$refs.payBill.init(this.multipleSelection,this.houseContent.id);
+        });
+      } else {
+        this.$message({
+          type: 'warning',
+          message: '请选择要缴费的数据',
+          duration: 1000,
+        });
+      }
+    }
   }
 }
 </script>

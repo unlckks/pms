@@ -27,5 +27,12 @@ export function getAllContentByHouseId(houseId) {
     method: 'get'
   })
 }
-
+//创建支付的订单包含订单的详情
+export function addPayTradeOrder(data) {
+  return request({
+    url: '/pay/order/addPayTradeOrder',
+    method: 'post',
+    data:data
+  })
+}
 

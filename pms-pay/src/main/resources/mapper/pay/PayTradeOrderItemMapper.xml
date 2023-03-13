@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.pay.mapper.PayTradeOrderItemMapper">
+
+    <resultMap type="PayTradeOrderItem" id="PayTradeOrderItemResult">
+        <result property="orderId"    column="order_id"    />
+        <result property="tradeId"    column="trade_id"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="price"    column="price"    />
+        <result property="num"    column="num"    />
+        <result property="amt"    column="amt"    />
+    </resultMap>
+
+    <sql id="selectPayTradeOrderItemVo">
+        select order_id, trade_id, item_name, price, num, amt from pay_trade_order_item
+    </sql>
+
+    <select id="selectPayTradeOrderItemList" parameterType="PayTradeOrderItem" resultMap="PayTradeOrderItemResult">
+        <include refid="selectPayTradeOrderItemVo"/>
+        <where>
+            <if test="tradeId != null  and tradeId != ''"> and trade_id = #{tradeId}</if>
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="amt != null "> and amt = #{amt}</if>
+        </where>
+    </select>
+
+    <select id="selectPayTradeOrderItemByOrderId" parameterType="String" resultMap="PayTradeOrderItemResult">
+        <include refid="selectPayTradeOrderItemVo"/>
+        where order_id = #{orderId}
+    </select>
+
+    <insert id="insertPayTradeOrderItem" parameterType="PayTradeOrderItem">
+        insert into pay_trade_order_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="tradeId != null">trade_id,</if>
+            <if test="itemName != null">item_name,</if>
+            <if test="price != null">price,</if>
+            <if test="num != null">num,</if>
+            <if test="amt != null">amt,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="tradeId != null">#{tradeId},</if>
+            <if test="itemName != null">#{itemName},</if>
+            <if test="price != null">#{price},</if>
+            <if test="num != null">#{num},</if>
+            <if test="amt != null">#{amt},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePayTradeOrderItem" parameterType="PayTradeOrderItem">
+        update pay_trade_order_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tradeId != null">trade_id = #{tradeId},</if>
+            <if test="itemName != null">item_name = #{itemName},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="amt != null">amt = #{amt},</if>
+        </trim>
+        where order_id = #{orderId}
+    </update>
+
+    <delete id="deletePayTradeOrderItemByOrderId" parameterType="String">
+        delete from pay_trade_order_item where order_id = #{orderId}
+    </delete>
+
+    <delete id="deletePayTradeOrderItemByOrderIds" parameterType="String">
+        delete from pay_trade_order_item where order_id in
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+</mapper>

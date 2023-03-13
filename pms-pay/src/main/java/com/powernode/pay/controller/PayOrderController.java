@@ -92,10 +92,10 @@ public class PayOrderController extends BaseController {
         if (houseId == null) {
             return AjaxResult.error("ID不能为空");
         }
+        //根据houseId查询未支付的订单
         PayOrder order = new PayOrder();
         order.setHouseId(houseId);
         order.setPayState(PayConstants.PAY_STATE_NO_PAY);
-        //根据houseId查询未支付的订单
         List<PayOrder> payOrders = this.payOrderService.selectPayOrderList(order);
         if (payOrders == null || payOrders.size() == 0) {
             return AjaxResult.error("当前菜单没有待支付的订单");
@@ -107,7 +107,7 @@ public class PayOrderController extends BaseController {
         //查询商圈的所有信息
         AssetHouseBlock assetHouseBlock =this.blockService.selectAssetHouseBlockById(assetHouse.getBlockId());
         //根据商铺id和状态查询合同信息
-        PayContract payContract  =this.contractService.selectPayContractByHouseId(houseId,PayConstants.PAY_CONTRACT_STATE_2);
+        PayContract payContract  =this.contractService.selectPayContractByHouseId(houseId,PayConstants.PAY_CONTRACT_STATE_1);
         //查询业主
         OwnerUser  ownerUser  = this.ownerUserService.selectOwnerUserById(payContract.getOwnerId());
         Map<String , Object> data =new HashMap<>();

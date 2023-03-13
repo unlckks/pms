@@ -256,7 +256,7 @@
             (#{id},#{type})
         </foreach>
     </insert>
-
+    <!--根据合同ID查询当前合同所有收费项目-->
     <select id="queryContractFeeItemsByContractId" resultMap="PayFeeItemResult">
         select *
         from pay_fee_item t1

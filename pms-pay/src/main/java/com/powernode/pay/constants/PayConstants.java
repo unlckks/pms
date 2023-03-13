@@ -6,6 +6,8 @@ package com.powernode.pay.constants;
  */
 public interface PayConstants {
 
+
+
     //未支付
     String PAY_STATE_NO_PAY="nopay";
 
@@ -42,6 +44,9 @@ public interface PayConstants {
     //前缀-订单流水号
     String PAY_PREFIX_ORDER="pay.prefix.order";
 
+    //前缀-支付订单流水号
+    String PAY_PREFIX_TRADE_ORDER="pay.prefix.trade";
+
     //合同状态
     String PAY_CONTRACT_STATE_1 = "1";//正常
     String PAY_CONTRACT_STATE_2 = "2";//撤销
@@ -68,4 +73,26 @@ public interface PayConstants {
     String FEE_ITEM_NUM_TYPE_USER_AREA="use_area";
     String FEE_ITEM_NUM_TYPE_METER="meter";
     String FEE_ITEM_NUM_TYPE_RENT_FEE="rent_fee";
+
+
+    /**
+     * 支付方式
+     * cash
+     * weixi
+     * aliPay
+     * cardPay
+     * transferPay
+     * miniapp_weixin
+     */
+    String PAY_TYPE_CASH="cash";
+    String PAY_TYPE_ALIPAY="aliPay";
+
+    //支付状态: 0-订单生成, 1-支付中, 2-支付成功, 3-支付失败, 4-已撤销, 5-已退款, 6-订单关闭
+    String PAY_ORDER_STATE_0 = "0";
+    String PAY_ORDER_STATE_1 = "1";
+    String PAY_ORDER_STATE_2 = "2";
+    String PAY_ORDER_STATE_3 = "3";
+    String PAY_ORDER_STATE_4 = "4";
+    String PAY_ORDER_STATE_5 = "5";
+    String PAY_ORDER_STATE_6 = "6";
 }
