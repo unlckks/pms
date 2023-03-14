@@ -2,6 +2,7 @@ package com.powernode.pay.mapper;
 
 import java.util.List;
 import com.powernode.pay.domain.PayTradeOrderItem;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 支付订单详情Mapper接口
@@ -58,4 +59,12 @@ public interface PayTradeOrderItemMapper
      * @return 结果
      */
     public int deletePayTradeOrderItemByOrderIds(String[] orderIds);
+
+    /**
+     * 根据主订单ID查询订单详情
+     *
+     * @param tradeId
+     * @return
+     */
+    List<PayTradeOrderItem> selectTradeOrderItemByTradeId(@Param("tradeId") String tradeId);
 }

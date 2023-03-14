@@ -75,4 +75,9 @@
             #{orderId}
         </foreach>
     </delete>
+     <!--根据主订单ID查询订单详情-->
+    <select id="selectTradeOrderItemByTradeId" resultMap="PayTradeOrderItemResult">
+        <include refid="selectPayTradeOrderItemVo">
+        </include> where  trade_id =  #{tradeId}
+    </select>
 </mapper>

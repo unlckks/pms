@@ -124,4 +124,11 @@
             #{id}
         </foreach>
     </delete>
+    <!--修改pay_order状态-->
+    <update id="updatePayOrderByOrderIds">
+        update pay_order set pay_state = #{state} where order_id
+        <foreach collection="orderIds" item="id" open=" in (" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

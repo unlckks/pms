@@ -2,6 +2,7 @@ package com.powernode.pay.mapper;
 
 import java.util.List;
 import com.powernode.pay.domain.PayOrder;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 订单Mapper接口
@@ -58,4 +59,12 @@ public interface PayOrderMapper
      * @return 结果
      */
     public int deletePayOrderByIds(Long[] ids);
+
+    /**
+     * 修改pay_order状态
+     *
+     * @param orderIds
+     * @param payed
+     */
+    void updatePayOrderByOrderIds(@Param("orderIds") List<String> orderIds, @Param("payed") String payed);
 }

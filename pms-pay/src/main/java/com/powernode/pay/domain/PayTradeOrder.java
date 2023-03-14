@@ -51,7 +51,7 @@ public class PayTradeOrder extends BaseEntity
 
     /** 第三第支付的订单ID */
     @Excel(name = "第三第支付的订单ID")
-    private Long tradeNo;
+    private String tradeNo;
 
     /** 渠道支付错误码 */
     @Excel(name = "渠道支付错误码")
@@ -138,12 +138,12 @@ public class PayTradeOrder extends BaseEntity
     {
         return openId;
     }
-    public void setTradeNo(Long tradeNo) 
+    public void setTradeNo(String tradeNo)
     {
         this.tradeNo = tradeNo;
     }
 
-    public Long getTradeNo() 
+    public String getTradeNo()
     {
         return tradeNo;
     }

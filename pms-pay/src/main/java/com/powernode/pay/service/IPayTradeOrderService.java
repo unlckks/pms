@@ -2,6 +2,7 @@ package com.powernode.pay.service;
 
 import java.util.List;
 import com.powernode.pay.domain.PayTradeOrder;
+import com.powernode.pay.domain.PayTradeOrderItem;
 import com.powernode.pay.entity.dto.TradeOrderDto;
 
 /**
@@ -66,4 +67,17 @@ public interface IPayTradeOrderService
      */
     void addPayTradeOrder(TradeOrderDto tradeOrderDto);
 
+    /**
+     * 根据主订单ID查询订单详情
+     * @param tradeId
+     * @return
+     */
+    List<PayTradeOrderItem> selectTradeOrderItemByTradeId(String tradeId);
+
+    /**
+     *订单回调
+     * @param orderId
+     * @param tradeNo
+     */
+    void paySuccess(String orderId, String tradeNo);
 }

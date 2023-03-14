@@ -14,7 +14,7 @@ export function addOrderNormal(code,ids) {
 // 查询合同列表列表
 export function listOrder(query) {
   return request({
-    url: '/pay/order/listContract',
+    url: '/pay/order/listOrder',
     method: 'get',
     params: query
   })
@@ -33,6 +33,27 @@ export function addPayTradeOrder(data) {
     url: '/pay/order/addPayTradeOrder',
     method: 'post',
     data:data
+  })
+}
+//根据主订单ID查询订单详情
+export function queryTradeOrderItemByTradeId(tradeId) {
+  return request({
+    url: '/pay/order/queryTradeOrderItemByTradeId/'+tradeId,
+    method: 'get'
+  })
+}
+//创建一个支付宝的支付订单
+export function createPayOrder(tradeId) {
+  return request({
+    url: '/pay/order/createPayOrder/'+tradeId,
+    method: 'get'
+  })
+}
+//根据支付订单ID检查订单支付状态
+export function checkOrderStateTradeId(tradeId){
+  return request({
+    url: '/pay/order/checkOrderStateTradeId/'+tradeId,
+    method: 'get'
   })
 }
 

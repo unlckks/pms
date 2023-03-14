@@ -129,3 +129,7 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
+
+app:
+  notify-url: http://5r5zpn.natappfree.cc
