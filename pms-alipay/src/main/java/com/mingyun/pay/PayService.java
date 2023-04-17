@@ -20,8 +20,8 @@ import java.util.Map;
 /**
  * 支付类的封装
  *
- * @author: 动力节点·武汉
- * 时间: 2023-03-13 09:26
+ * @author: mingyun
+ * 时间: 2023-03-13 09:33
  */
 public class PayService {
     //输出日志

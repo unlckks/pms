@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.powernode</groupId>
+    <groupId>com.mingyun</groupId>
     <artifactId>pms</artifactId>
     <version>1.0.0</version>
 
@@ -137,76 +137,76 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-quartz</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!-- 代码生成-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-generator</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-framework</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-system</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-common</artifactId>
                 <version>${pms.version}</version>
             </dependency>
             <!--资源管理模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-asset</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!--收费及收费设置管理模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-pay</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!--协同办公管理模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-oa</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!--业主管理模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-owner</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!--停车管理模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-park</artifactId>
                 <version>${pms.version}</version>
             </dependency>
 
             <!--统计管理模块-->
             <dependency>
-                <groupId>com.powernode</groupId>
+                <groupId>com.mingyun</groupId>
                 <artifactId>pms-stat</artifactId>
                 <version>${pms.version}</version>
             </dependency>

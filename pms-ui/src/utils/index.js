@@ -1,4 +1,4 @@
-import { parseTime } from './powernode'
+import { parseTime } from './mingyun'
 
 /**
  * 表格时间格式化

@@ -3,7 +3,7 @@ import { Notification, MessageBox, Message, Loading } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
-import { tansParams, blobValidate } from "@/utils/powernode";
+import { tansParams, blobValidate } from "@/utils/mingyun";
 import cache from '@/plugins/cache'
 import { saveAs } from 'file-saver'
 

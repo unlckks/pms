@@ -1,4 +1,4 @@
-import { mergeRecursive } from "@/utils/powernode";
+import { mergeRecursive } from "@/utils/mingyun";
 import DictOptions from './DictOptions'
 
 /**
