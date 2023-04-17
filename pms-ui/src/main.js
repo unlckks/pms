@@ -6,7 +6,7 @@ import Element from 'element-ui'
 import './assets/styles/element-variables.scss'
 
 import '@/assets/styles/index.scss' // global css
-import '@/assets/styles/powernode.scss' // powernode css
+import '@/assets/styles/powernode.scss' // mingyun css
 import App from './App'
 import store from './store'
 import router from './router'

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.powernode.pay.mapper.PayPrestoreAccountMapper">
+<mapper namespace="com.mingyun.pay.mapper.PayPrestoreAccountMapper">
     <resultMap type="PayPrestoreAccount" id="PayPrestoreAccountResult">
         <result property="id" column="id"/>
         <result property="feeUserId" column="fee_user_id"/>

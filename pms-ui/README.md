@@ -5,7 +5,7 @@
 git clone https://gitee.com/y_project/RuoYi-Vue
 
 # 进入项目目录
-cd powernode-ui
+cd mingyun-ui
 
 # 安装依赖
 npm install

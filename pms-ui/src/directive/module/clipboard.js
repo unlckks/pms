@@ -1,6 +1,6 @@
 /**
 * v-clipboard 文字复制剪贴
-* Copyright (c) 2021 powernode
+* Copyright (c) 2021 mingyun
 */
 
 import Clipboard from 'clipboard'

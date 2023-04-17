@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.powernode.pay.mapper.PayFeeItemMapper">
+<mapper namespace="com.mingyun.pay.mapper.PayFeeItemMapper">
     <resultMap type="PayFeeItem" id="PayFeeItemResult">
         <result property="id" column="id"/>
         <result property="type" column="type"/>

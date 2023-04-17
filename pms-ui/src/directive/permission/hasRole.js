@@ -1,6 +1,6 @@
  /**
  * v-hasRole 角色权限处理
- * Copyright (c) 2019 powernode
+ * Copyright (c) 2019 mingyun
  */
 
 import store from '@/store'

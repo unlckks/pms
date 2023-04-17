@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.powernode.asset.mapper.AssetBuildingMapper">
+<mapper namespace="com.mingyun.asset.mapper.AssetBuildingMapper">
 
     <resultMap type="AssetBuilding" id="AssetBuildingResult">
         <result property="id"    column="id"    />

@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.powernode.common.annotation.Log;
-import com.powernode.common.core.controller.BaseController;
-import com.powernode.common.core.domain.AjaxResult;
-import com.powernode.common.enums.BusinessType;
+import com.mingyun.common.annotation.Log;
+import com.mingyun.common.core.controller.BaseController;
+import com.mingyun.common.core.domain.AjaxResult;
+import com.mingyun.common.enums.BusinessType;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
-import com.powernode.common.utils.poi.ExcelUtil;
+import com.mingyun.common.utils.poi.ExcelUtil;
 #if($table.crud || $table.sub)
-import com.powernode.common.core.page.TableDataInfo;
+import com.mingyun.common.core.page.TableDataInfo;
 #elseif($table.tree)
 #end
 
